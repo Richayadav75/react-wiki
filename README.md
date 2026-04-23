@@ -27,4 +27,13 @@ Browse concepts on the [Study Portal](https://react-wiki-frontend.vercel.app) or
 | [custom-hooks](./custom-hooks/) | Patterns | Intermediate |
 | [component-lifecycle](./component-lifecycle/) | Fundamentals | Beginner |
 | [props-vs-state](./props-vs-state/) | Fundamentals | Beginner |
+| [closures](./closures/) | JavaScript | Intermediate |
+| [prototypes](./prototypes/) | JavaScript | Advanced |
+| [event-loop](./event-loop/) | Core Concepts | Advanced |
+| [this-keyword](./this-keyword/) | Core Concepts | Intermediate |
+| [promises](./promises/) | JavaScript | Intermediate |
+| [hoisting](./hoisting/) | Core Concepts | Beginner |
+| [async-await](./async-await/) | JavaScript | Intermediate |
+| [es6-features](./es6-features/) | JavaScript | Beginner |
+| [array-methods](./array-methods/) | JavaScript | Beginner |
 # react-wiki
