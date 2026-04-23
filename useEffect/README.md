@@ -77,8 +77,41 @@ useEffect(() => {
 }, []);
 ```
 
-## Learn More
+## Practice
+```tsx
+function WindowWidth() {
+  const [width, setWidth] = useState(0);
 
+  useEffect(() => {
+    // 1. Initial set
+    setWidth(window.innerWidth);
+
+    // 2. Setup listener
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    // 3. Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Only runs once
+
+  return (
+    <div className="p-4 bg-gray-100 rounded">
+      <p>Current window width: <strong>{width}px</strong></p>
+      <p className="text-xs text-gray-500">Try resizing your browser window!</p>
+    </div>
+  );
+}
+```
+
+## Interview Questions
+1. **Does useEffect run before or after the paint?**
+   It runs *after* the render and *after* the browser paint. This makes it non-blocking. If you need to manipulate the DOM before paint, use `useLayoutEffect`.
+2. **What happens if you omit the dependency array?**
+   The effect will run after **every single render** (mount and every update). This is usually bad for performance and can lead to infinite loops if you set state inside.
+
+## Learn More
 - [React Docs — useEffect](https://react.dev/reference/react/useEffect)
 - [A Complete Guide to useEffect — Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/)
 - [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect)

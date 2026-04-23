@@ -79,7 +79,33 @@ function Header() {
 - **Provider not wrapping the consumer** — The custom hook will throw; wrap your app (or the relevant subtree) with the Provider.
 - **Overusing context for everything** — For purely local state, `useState` is simpler.
 
-## Learn More
+## Practice
+```tsx
+const UserContext = createContext(null);
 
+function App() {
+  const [user, setUser] = useState({ name: "Alex" });
+
+  return (
+    <UserContext.Provider value={user}>
+      <Navbar />
+      <button onClick={() => setUser({ name: "Sam" })}>Change User</button>
+    </UserContext.Provider>
+  );
+}
+
+function Navbar() {
+  const user = useContext(UserContext);
+  return <nav>Welcome, {user.name}!</nav>;
+}
+```
+
+## Interview Questions
+1. **How do you prevent unnecessary re-renders when using Context?**
+   You can memoize the provider's value with `useMemo`, split the context into multiple contexts (one for state, one for dispatch), or use a state management library like Zustand.
+2. **What is "Prop Drilling" and how does Context solve it?**
+   Prop drilling is passing data through many layers of components that don't need it. Context allows a component to "teleport" data to any descendant without intermediate components being involved.
+
+## Learn More
 - [React Docs — useContext](https://react.dev/reference/react/useContext)
 - [Passing Data Deeply with Context](https://react.dev/learn/passing-data-deeply-with-context)

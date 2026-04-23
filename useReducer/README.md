@@ -82,7 +82,39 @@ function Cart() {
 - **Side effects in the reducer** — Reducers must be pure functions; put side effects in `useEffect`.
 - **Over-engineering simple state** — If you have one boolean flag, `useState` is cleaner.
 
-## Learn More
+## Practice
+```tsx
+const initialState = { count: 0 };
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <div className="p-4 border rounded">
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+    </div>
+  );
+}
+```
+
+## Interview Questions
+1. **How is useReducer different from useState?**
+   `useReducer` is better for complex state that has multiple sub-values or when the next state depends on the previous one. It also helps decouple the *what* happens (action) from the *how* it's updated (reducer).
+2. **Can a reducer be asynchronous?**
+   No, reducers must be pure functions. They should only calculate the next state. Any async logic (like API calls) should happen outside the reducer, usually in an event handler or `useEffect`, which then dispatches an action.
+
+## Learn More
 - [React Docs — useReducer](https://react.dev/reference/react/useReducer)
 - [Extracting State Logic into a Reducer](https://react.dev/learn/extracting-state-logic-into-a-reducer)

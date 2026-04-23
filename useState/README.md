@@ -70,7 +70,35 @@ setForm(prev => ({ ...prev, name: 'Alice' }));
 - **Unnecessary state** — if a value can be derived from props or other state, don't store it in state.
 - **Missing the functional update form** — leads to stale closures in callbacks and effects.
 
-## Learn More
+## Practice
+```tsx
+function SearchInput() {
+  const [query, setQuery] = useState("");
+  
+  return (
+    <div className="p-4 border rounded shadow">
+      <h3 className="font-bold mb-2">Search Case Study</h3>
+      <input 
+        type="text" 
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Type to search..."
+        className="w-full p-2 border rounded"
+      />
+      <p className="mt-2 text-sm text-gray-600">
+        Active Query: <strong>{query}</strong>
+      </p>
+    </div>
+  );
+}
+```
 
+## Interview Questions
+1. **What happens if you mutate state directly instead of using the setter?**
+   React will not detect the change because it checks for reference equality. No re-render will be triggered, and the UI will stay out of sync.
+2. **Why does React batch state updates?**
+   Batching reduces the number of re-renders, improving performance. Multiple state updates in the same event handler will only result in one render.
+
+## Learn More
 - [React Docs — useState](https://react.dev/reference/react/useState)
 - [useState Deep Dive — Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/)
