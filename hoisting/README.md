@@ -1,23 +1,32 @@
-- Category: Core Concepts of JavaScript
+- Category: Core Concepts
 - Difficulty: Beginner
-- Related: Closures, Scope
+- Related: closures
 
-# Hoisting
+### What is Hoisting?
+Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope before code execution.
 
-Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope.
+---
 
-## What is Hoisted?
-1. **Variable Declarations**: `var` is hoisted and initialized with `undefined`. `let` and `const` are hoisted but not initialized (Temporal Dead Zone).
-2. **Function Declarations**: Fully hoisted, meaning you can call them before they are defined.
-3. **Class Declarations**: Not hoisted.
+### 1. Execution Context
+**Theory**: During the compilation phase, JS stores function and variable declarations in memory, which allows you to use them before you declare them in the code.
 
-## Example
+**Working Flow**
+```text
+[ Compile Phase ] --> ( Move declarations to top ) --> [ Execution Phase ]
+```
+
+**Key Features**:
+- **var**: Hoisted and initialized with `undefined`.
+- **let/const**: Hoisted but NOT initialized (Temporal Dead Zone).
+- **Functions**: Fully hoisted (can be called before definition).
+
+**Example**:
 ```javascript
-console.log(x); // undefined
-var x = 5;
+// Function Hoisting
+greet(); // Works perfectly!
+function greet() { console.log("Hello!"); }
 
-sayHello(); // "Hello!"
-function sayHello() {
-  console.log("Hello!");
-}
+// Variable Hoisting
+console.log(myVar); // undefined (not an error)
+var myVar = 10;
 ```

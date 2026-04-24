@@ -1,27 +1,29 @@
 - Category: JavaScript
 - Difficulty: Beginner
-- Related: Arrow Functions, Destructuring
+- Related: variables
 
-# ES6+ Features
+### What are ES6+ Features?
+ES6 (ECMAScript 2015) introduced massive improvements to JavaScript syntax, making it more concise and powerful.
 
-Modern JavaScript (ES6 and beyond) introduced many features that make coding more efficient and readable.
+---
 
-## Key Features
-- **Arrow Functions**: Concise syntax for functions.
-- **Destructuring**: Extract values from arrays or objects easily.
-- **Spread/Rest Operator**: `...` for expanding or collecting elements.
-- **Template Literals**: Backticks for string interpolation.
-- **Let/Const**: Block-scoped variable declarations.
+### 1. Modern Syntax Enhancements
+**Theory**: These features reduce boilerplate code and introduce concepts from functional and object-oriented programming.
 
-## Example
+**Key Features**:
+- **Arrow Functions**: Shorter syntax, no binding of `this`.
+- **Destructuring**: Unpacking arrays/objects into distinct variables.
+- **Spread/Rest (`...`)**: Expanding arrays/objects or gathering arguments.
+- **Template Literals**: Using backticks (``) for string interpolation.
+
+**Example**:
 ```javascript
-const user = { name: 'Wiki', age: 25 };
-const { name, age } = user; // Destructuring
-console.log(`User ${name} is ${age} years old.`); // Template Literal
-```
+// Destructuring & Template Literals
+const user = { name: "Richa", age: 25 };
+const { name, age } = user;
+console.log(`User: ${name}, Age: ${age}`);
 
-## Interview Questions
-1. **What is the difference between let, const, and var?**
-   `var` is function-scoped and hoisted. `let` and `const` are block-scoped and not initialized during hoisting (TDZ). `const` cannot be reassigned.
-2. **What are arrow functions?**
-   They are a shorter syntax for writing functions and they do not have their own `this`.
+// Spread Operator
+const arr1 = [1, 2];
+const arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]
+```

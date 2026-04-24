@@ -1,31 +1,36 @@
 - Category: JavaScript
 - Difficulty: Intermediate
-- Related: Async/Await, Callbacks
+- Related: async-await
 
-# Promises
+### What are Promises?
+A Promise is an object representing the eventual completion (or failure) of an asynchronous operation.
 
-The `Promise` object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+---
 
-## States
-1. **Pending**: Initial state, neither fulfilled nor rejected.
-2. **Fulfilled**: The operation completed successfully.
-3. **Rejected**: The operation failed.
+### 1. Asynchronous Handling
+**Theory**: Instead of using callbacks (which lead to callback hell), promises provide a cleaner, chainable way to handle async tasks.
 
-## Example
+**Working Flow**
+```text
+[ Pending ] --> ( Success ) --> [ Resolved (.then) ]
+            |
+            L-> ( Failure ) --> [ Rejected (.catch) ]
+```
+
+**Key Features**:
+- **States**: Pending, Fulfilled, or Rejected.
+- **Chaining**: You can chain multiple `.then()` calls.
+- **Error Catching**: A single `.catch()` handles errors for the chain.
+
+**Example**:
 ```javascript
-const myPromise = new Promise((resolve, reject) => {
-  const success = true;
-  if (success) {
-    resolve("Operation successful!");
-  } else {
-    reject("Operation failed.");
-  }
+let myPromise = new Promise((resolve, reject) => {
+  let success = true;
+  if(success) resolve("Task Complete!");
+  else reject("Task Failed!");
 });
 
 myPromise
-  .then(value => console.log(value))
-  .catch(error => console.error(error));
+  .then((result) => console.log(result))
+  .catch((error) => console.log(error));
 ```
-
-## Chaining
-Promises allow you to chain operations using `.then()`, avoiding "callback hell".

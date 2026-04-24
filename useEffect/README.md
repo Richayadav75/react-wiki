@@ -1,117 +1,31 @@
 - Category: Hooks
 - Difficulty: Beginner
-- Related: useLayoutEffect, useState, useRef
+- Related: useState
 
-`useEffect` lets you **synchronize a component with an external system** — fetching data, subscribing to events, manipulating the DOM, or setting up timers. It runs *after* the browser has painted.
+### What is useEffect?
+`useEffect` allows you to perform "side effects" in your components, such as data fetching, subscriptions, or manually changing the DOM.
 
-## Syntax
+---
 
+### 1. Component Lifecycle
+**Theory**: It runs after the component renders. It can be configured to run once, every time, or only when certain data changes.
+
+**Working Flow**
+```text
+[ Render ] --> [ Run Effect ] --> ( Cleanup on Unmount )
+```
+
+**Key Features**:
+- **Dependency Array**: Controls when the effect runs (`[]` = once, `[val]` = when val changes).
+- **Cleanup Function**: Used to stop timers or unsubscribe from APIs.
+
+**Example (Fetching Data)**:
 ```tsx
 useEffect(() => {
-  // setup code (runs after render)
+  console.log("Component has mounted!");
+  
   return () => {
-    // cleanup code (runs before next effect or unmount)
+    console.log("Component will unmount (Cleanup)!");
   };
-}, [dependency1, dependency2]);
+}, []); // Empty array means run only once
 ```
-
-## Dependency array rules
-
-| Array | Behaviour |
-|-------|-----------|
-| Omitted | Runs after **every** render |
-| `[]` | Runs **once** after mount |
-| `[a, b]` | Runs when `a` or `b` changes |
-
-## Example — Fetch on mount
-
-```tsx
-import { useState, useEffect } from 'react';
-
-function UserProfile({ userId }: { userId: string }) {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    fetch(`/api/users/${userId}`)
-      .then(res => res.json())
-      .then(data => {
-        if (!cancelled) setUser(data);
-      });
-
-    return () => { cancelled = true; }; // cleanup for fast refresh / prop change
-  }, [userId]);
-
-  if (!user) return <p>Loading…</p>;
-  return <p>{user.name}</p>;
-}
-```
-
-## Example — Event listener
-
-```tsx
-useEffect(() => {
-  const handler = () => setScrollY(window.scrollY);
-  window.addEventListener('scroll', handler);
-  return () => window.removeEventListener('scroll', handler);
-}, []);
-```
-
-## Common Pitfalls
-
-- **Stale closures** — If your effect reads a value that changes, add it to the dependency array.
-- **Infinite loops** — Putting an object/array literal or inline function in the deps array creates a new reference on every render.
-- **Missing cleanup** — Subscriptions and timers that aren't cleaned up cause memory leaks.
-- **Setting state unconditionally in an effect** — Always check if the component is still mounted (use the cancellation pattern above).
-- **Using `async` directly** — `useEffect(async () => …)` is not supported. Declare an `async` function inside and call it.
-
-```tsx
-// ✅ Correct async pattern
-useEffect(() => {
-  async function load() {
-    const data = await fetchData();
-    setData(data);
-  }
-  load();
-}, []);
-```
-
-## Practice
-```tsx
-function WindowWidth() {
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    // 1. Initial set
-    setWidth(window.innerWidth);
-
-    // 2. Setup listener
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-
-    // 3. Cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []); // Only runs once
-
-  return (
-    <div className="p-4 bg-gray-100 rounded">
-      <p>Current window width: <strong>{width}px</strong></p>
-      <p className="text-xs text-gray-500">Try resizing your browser window!</p>
-    </div>
-  );
-}
-```
-
-## Interview Questions
-1. **Does useEffect run before or after the paint?**
-   It runs *after* the render and *after* the browser paint. This makes it non-blocking. If you need to manipulate the DOM before paint, use `useLayoutEffect`.
-2. **What happens if you omit the dependency array?**
-   The effect will run after **every single render** (mount and every update). This is usually bad for performance and can lead to infinite loops if you set state inside.
-
-## Learn More
-- [React Docs — useEffect](https://react.dev/reference/react/useEffect)
-- [A Complete Guide to useEffect — Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/)
-- [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect)

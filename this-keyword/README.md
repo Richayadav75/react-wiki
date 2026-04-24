@@ -1,36 +1,27 @@
-- Category: Core Concepts of JavaScript
+- Category: Core Concepts
 - Difficulty: Intermediate
-- Related: Call, Apply, Bind
+- Related: closures
 
-# The "this" Keyword
+### What is the "this" Keyword?
+The `this` keyword refers to the object that is currently executing the code. Its value depends entirely on *how* the function is called.
 
-In JavaScript, the `this` keyword refers to the object it belongs to. Its value is determined by how a function is called (runtime binding).
+---
 
-## Binding Rules
-1. **Default Binding**: In a standalone function call, `this` refers to the global object (`window` in browsers, `global` in Node). In strict mode, it is `undefined`.
-2. **Implicit Binding**: When a function is called as a method of an object, `this` refers to that object.
-3. **Explicit Binding**: Using `.call()`, `.apply()`, or `.bind()` to explicitly set `this`.
-4. **New Binding**: When a function is called with the `new` keyword, `this` refers to the newly created object.
-5. **Arrow Functions**: Arrow functions do not have their own `this`. They inherit it from the lexical scope.
+### 1. Execution Context Binding
+**Theory**: Unlike other languages, `this` is not bound to the function itself, but to the object calling it.
 
-## Practice
+**Key Features**:
+- **Global Context**: Refers to the `window` object.
+- **Object Method**: Refers to the object owning the method.
+- **Arrow Functions**: They DO NOT have their own `this`; they inherit it from the parent scope.
+
+**Example**:
 ```javascript
-const obj = {
-  name: "Wiki",
+const user = {
+  name: "Richa",
   greet: function() {
-    console.log("Hello, " + this.name);
-  },
-  arrowGreet: () => {
-    console.log("Hello, " + this.name);
+    console.log("Hi, I am " + this.name); // "this" is the user object
   }
 };
-
-obj.greet(); // Hello, Wiki
-obj.arrowGreet(); // Hello, undefined
+user.greet();
 ```
-
-## Interview Questions
-1. **How does 'this' work in arrow functions?**
-   Arrow functions inherit 'this' from their parent lexical scope; they don't have their own.
-2. **What is the difference between call and apply?**
-   Both invoke a function with a specific 'this', but `call` takes arguments individually while `apply` takes them as an array.
