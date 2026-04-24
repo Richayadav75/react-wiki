@@ -5,7 +5,7 @@ JavaScript is a programming language that makes websites interactive. Think of i
 - **JavaScript** = muscles (makes things move/work)
 
 
-![Concept](concept.png)
+![Concept](./concept.png)
 
 
 
