@@ -10,6 +10,7 @@ A curated reference hub for learning Programming, JavaScript, and React concepts
 
 | Topic | Category | Track | Difficulty |
 |-------|----------|-------|------------|
+| [basic-javascript](./basic-javascript/) | Fundamentals | JavaScript |  Beginner |
 | [variables](./variables/) | Fundamentals | JavaScript |  Beginner |
 | [operators](./operators/) | Fundamentals | JavaScript | Beginner |
 | [data-types](./data-types/) | Fundamentals | JavaScript | Beginner |
