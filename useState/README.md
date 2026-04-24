@@ -29,3 +29,7 @@ const [count, setCount] = useState(0);
 // 2. 'setCount' is the function we use to change the value.
 // 3. To update: setCount(count + 1);
 ```
+
+---
+
+[View Interview Questions](./interview.md)

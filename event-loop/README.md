@@ -35,3 +35,7 @@ Promise.resolve().then(() => console.log("Promise (Microtask Queue)"));
 console.log("End");
 // Output order: Start -> End -> Promise -> Timeout
 ```
+
+---
+
+[View Interview Questions](./interview.md)

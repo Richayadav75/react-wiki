@@ -82,3 +82,7 @@ console.log(sentence.includes("fox")); // true
 // Find exactly where 'quick' starts
 console.log(sentence.indexOf("quick")); // 4
 ```
+
+---
+
+[View Interview Questions](./interview.md)

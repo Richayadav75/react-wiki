@@ -46,3 +46,7 @@ console.log(numbers); // Set { 1, 2, 3 }
 numbers.add(4);
 numbers.add(1); // Ignored, 1 already exists
 ```
+
+---
+
+[View Interview Questions](./interview.md)

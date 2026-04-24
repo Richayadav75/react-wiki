@@ -24,3 +24,7 @@ const focusInput = () => {
 
 return <input ref={inputRef} />;
 ```
+
+---
+
+[View Interview Questions](./interview.md)

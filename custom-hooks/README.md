@@ -100,3 +100,7 @@ function useFetch<T>(url: string) {
 
 - [React Docs — Custom Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks)
 - [useHooks.com](https://usehooks.com/) — collection of production-ready custom hooks
+
+---
+
+[View Interview Questions](./interview.md)

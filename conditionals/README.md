@@ -45,3 +45,7 @@ if (marks > 90) console.log("A+");
 else if (marks > 75) console.log("A");
 else console.log("B");
 ```
+
+---
+
+[View Interview Questions](./interview.md)

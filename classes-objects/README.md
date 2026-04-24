@@ -40,3 +40,7 @@ class User {
 const user1 = new User("Richa", 25);
 user1.greet(); // "Hi, I am Richa"
 ```
+
+---
+
+[View Interview Questions](./interview.md)

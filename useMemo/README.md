@@ -20,3 +20,7 @@ const expensiveResult = useMemo(() => {
   return heavyCalculation(data);
 }, [data]); // Only recalculates if 'data' changes
 ```
+
+---
+
+[View Interview Questions](./interview.md)

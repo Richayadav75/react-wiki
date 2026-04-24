@@ -79,3 +79,7 @@ if (isLogged && hasPermission) {
   console.log("Access Denied"); // This will run
 }
 ```
+
+---
+
+[View Interview Questions](./interview.md)

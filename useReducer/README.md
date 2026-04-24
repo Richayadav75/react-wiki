@@ -22,3 +22,7 @@ const [state, dispatch] = useReducer(reducer, { count: 0 });
 // Triggering an update:
 dispatch({ type: 'increment' });
 ```
+
+---
+
+[View Interview Questions](./interview.md)

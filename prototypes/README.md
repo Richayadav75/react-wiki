@@ -38,3 +38,7 @@ console.log(rabbit.jumps); // true (found directly on rabbit)
 console.log(rabbit.eats);  // true (found on prototype: animal)
 rabbit.walk();             // "Animal walks" (found on prototype: animal)
 ```
+
+---
+
+[View Interview Questions](./interview.md)

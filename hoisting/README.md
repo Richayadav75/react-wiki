@@ -30,3 +30,7 @@ function greet() { console.log("Hello!"); }
 console.log(myVar); // undefined (not an error)
 var myVar = 10;
 ```
+
+---
+
+[View Interview Questions](./interview.md)

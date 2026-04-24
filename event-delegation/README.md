@@ -45,3 +45,7 @@ tabContainer.addEventListener('click', (e) => {
    Use `event.stopPropagation()`.
 3. **What is `event.target` vs `event.currentTarget`?**
    `event.target` is the element that triggered the event (the child). `event.currentTarget` is the element the listener is attached to (the parent).
+
+---
+
+[View Interview Questions](./interview.md)

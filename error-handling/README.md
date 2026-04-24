@@ -69,3 +69,7 @@ try {
   console.log("Caught custom error: " + err.message);
 }
 ```
+
+---
+
+[View Interview Questions](./interview.md)

@@ -17,10 +17,10 @@ JavaScript provides a built-in `Math` object for mathematical tasks and `Number`
 3.99 --( floor )--> 3
 ```
 
-**Key Methods**:
-- `Math.round(x)`: Rounds to nearest integer.
-- `Math.ceil(x)`: Always rounds UP.
-- `Math.floor(x)`: Always rounds DOWN.
+**Key Features**:
+- **Math.round(x)**: Rounds to nearest integer.
+- **Math.ceil(x)**: Always rounds UP.
+- **Math.floor(x)**: Always rounds DOWN.
 
 **Step-by-Step Example**:
 ```javascript
@@ -37,8 +37,8 @@ console.log(Math.ceil(10.1));   // 11
 **Theory**: Generating random numbers is crucial for games/logic, while formatting is needed for UI display.
 
 **Key Methods**:
-- `Math.random()`: Returns a random decimal between 0 (inclusive) and 1 (exclusive).
-- `toFixed(n)`: Formats a number using fixed-point notation (returns a string).
+- **Math.random()**: Returns a random decimal between 0 (inclusive) and 1 (exclusive).
+- **toFixed(n)**: Formats a number using fixed-point notation (returns a string).
 
 **Step-by-Step Example**:
 ```javascript
@@ -53,3 +53,7 @@ console.log(randomInt);
 let cost = 5.56789;
 console.log(cost.toFixed(2)); // "5.57" (Returns a string!)
 ```
+
+---
+
+[View Interview Questions](./interview.md)

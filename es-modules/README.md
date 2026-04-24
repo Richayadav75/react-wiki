@@ -51,3 +51,7 @@ loadMath();
    Named exports require braces and must match the name exactly. Default exports can be imported with any name and don't use braces.
 2. **What are the benefits of ES Modules over CommonJS?**
    ESM supports static analysis, which enables "tree-shaking" (removing unused code). It is also the browser-native standard.
+
+---
+
+[View Interview Questions](./interview.md)

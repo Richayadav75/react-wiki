@@ -61,3 +61,7 @@ box.innerHTML = "<strong>Bold Text!</strong>";
 box.style.backgroundColor = "blue";
 box.style.fontSize = "24px";
 ```
+
+---
+
+[View Interview Questions](./interview.md)

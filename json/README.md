@@ -35,3 +35,7 @@ const receivedData = '{"name":"John","age":30}';
 const parsedUser = JSON.parse(receivedData);
 console.log(parsedUser.name); // "John"
 ```
+
+---
+
+[View Interview Questions](./interview.md)

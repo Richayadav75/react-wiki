@@ -49,3 +49,7 @@ let isStudent = true;
 let user = { name: "Richa", city: "Delhi" };
 let colors = ["Red", "Blue", "Green"];
 ```
+
+---
+
+[View Interview Questions](./interview.md)

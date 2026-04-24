@@ -79,3 +79,7 @@ useLayoutEffect(() => {
 - [React Docs — useEffect](https://react.dev/reference/react/useEffect)
 - [React Docs — useLayoutEffect](https://react.dev/reference/react/useLayoutEffect)
 - [React Lifecycle Diagram](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+---
+
+[View Interview Questions](./interview.md)

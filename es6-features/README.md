@@ -27,3 +27,7 @@ console.log(`User: ${name}, Age: ${age}`);
 const arr1 = [1, 2];
 const arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]
 ```
+
+---
+
+[View Interview Questions](./interview.md)

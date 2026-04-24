@@ -88,3 +88,7 @@ const fullName = `${firstName} ${lastName}`;
 - [React Docs — Passing Props to a Component](https://react.dev/learn/passing-props-to-a-component)
 - [React Docs — State: A Component's Memory](https://react.dev/learn/state-a-components-memory)
 - [Thinking in React](https://react.dev/learn/thinking-in-react)
+
+---
+
+[View Interview Questions](./interview.md)

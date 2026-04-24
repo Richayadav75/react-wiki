@@ -58,3 +58,7 @@ function Parent() {
 3. **What kind of comparison does it do by default?**
    A shallow comparison of props.
 Ref references or objects passed as props must be stabilized to work effectively with `React.memo`.
+
+---
+
+[View Interview Questions](./interview.md)

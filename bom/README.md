@@ -36,3 +36,7 @@ console.log(currentUrl);
 // Step 3: Redirect the user to a new page
 // window.location.assign("https://geeksforgeeks.org");
 ```
+
+---
+
+[View Interview Questions](./interview.md)

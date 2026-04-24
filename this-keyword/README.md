@@ -25,3 +25,7 @@ const user = {
 };
 user.greet();
 ```
+
+---
+
+[View Interview Questions](./interview.md)

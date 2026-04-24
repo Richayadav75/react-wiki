@@ -31,3 +31,7 @@ async function fetchData() {
   }
 }
 ```
+
+---
+
+[View Interview Questions](./interview.md)

@@ -59,3 +59,7 @@ button.addEventListener("click", (event) => {
   event.stopPropagation(); 
 });
 ```
+
+---
+
+[View Interview Questions](./interview.md)

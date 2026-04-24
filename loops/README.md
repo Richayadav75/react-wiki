@@ -46,3 +46,7 @@ while (energy > 0) {
   energy--;
 }
 ```
+
+---
+
+[View Interview Questions](./interview.md)

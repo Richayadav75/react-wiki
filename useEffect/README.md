@@ -29,3 +29,7 @@ useEffect(() => {
   };
 }, []); // Empty array means run only once
 ```
+
+---
+
+[View Interview Questions](./interview.md)

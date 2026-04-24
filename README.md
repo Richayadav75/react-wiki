@@ -10,11 +10,13 @@ A curated reference hub for learning Programming, JavaScript, and React concepts
 
 | Topic | Category | Track | Difficulty |
 |-------|----------|-------|------------|
-| [variables](./variables/) | Fundamentals | JavaScript | Beginner |
+| [variables](./variables/) | Fundamentals | JavaScript |  Beginner |
 | [operators](./operators/) | Fundamentals | JavaScript | Beginner |
 | [data-types](./data-types/) | Fundamentals | JavaScript | Beginner |
 | [conditionals](./conditionals/) | Fundamentals | JavaScript | Beginner |
 | [loops](./loops/) | Fundamentals | JavaScript | Beginner |
+| [props-vs-state](./props-vs-state/) | Fundamentals | React | Beginner |
+| [component-lifecycle](./component-lifecycle/) | Fundamentals | React | Beginner |
 | [useState](./useState/) | Hooks | React | Beginner |
 | [useEffect](./useEffect/) | Hooks | React | Beginner |
 | [useRef](./useRef/) | Hooks | React | Intermediate |
@@ -24,8 +26,6 @@ A curated reference hub for learning Programming, JavaScript, and React concepts
 | [useReducer](./useReducer/) | State Management | React | Intermediate |
 | [react-memo](./react-memo/) | Performance | React | Intermediate |
 | [custom-hooks](./custom-hooks/) | Patterns | React | Intermediate |
-| [component-lifecycle](./component-lifecycle/) | Fundamentals | React | Beginner |
-| [props-vs-state](./props-vs-state/) | Fundamentals | React | Beginner |
 | [closures](./closures/) | JavaScript | JavaScript | Intermediate |
 | [hoisting](./hoisting/) | Core Concepts | JavaScript | Beginner |
 | [promises](./promises/) | JavaScript | JavaScript | Intermediate |
@@ -56,5 +56,6 @@ A curated reference hub for learning Programming, JavaScript, and React concepts
 
 Each folder is a concept. Inside every folder you'll find:
 - A `README.md` with an explanation, code examples, working flows, and practice cases.
+- An `interview.md` with top interview questions and answers.
 
 Browse concepts on the [Study Portal](https://react-wiki-frontend.vercel.app) or directly in this repo.

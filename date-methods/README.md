@@ -16,10 +16,10 @@ The `Date` object is used to work with dates and times. You create a new date in
 ```
 
 **Key Methods**:
-- `getFullYear()`: Gets the 4-digit year.
-- `getMonth()`: Gets the month (0-11, where 0 is January!).
-- `getDate()`: Gets the day of the month (1-31).
-- `getDay()`: Gets the day of the week (0-6, where 0 is Sunday).
+- **getFullYear()**: Gets the 4-digit year.
+- **getMonth()**: Gets the month (0-11, where 0 is January!).
+- **getDate()**: Gets the day of the month (1-31).
+- **getDay()**: Gets the day of the week (0-6, where 0 is Sunday).
 
 **Step-by-Step Example**:
 ```javascript
@@ -33,3 +33,7 @@ const date = now.getDate();
 
 console.log(`Today is ${year}-${month + 1}-${date}`);
 ```
+
+---
+
+[View Interview Questions](./interview.md)

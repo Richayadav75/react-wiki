@@ -139,3 +139,7 @@ const users = [
 const foundUser = users.find(user => user.id === 1);
 console.log(foundUser.name); // "Richa"
 ```
+
+---
+
+[View Interview Questions](./interview.md)

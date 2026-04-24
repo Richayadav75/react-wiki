@@ -54,3 +54,7 @@ function validateEmail(email) {
 validateEmail("test@example.com"); // "Valid email format!"
 validateEmail("test_example.com"); // "Invalid email!"
 ```
+
+---
+
+[View Interview Questions](./interview.md)

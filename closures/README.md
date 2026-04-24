@@ -33,3 +33,7 @@ let counter = makeCounter();
 console.log(counter()); // 1
 console.log(counter()); // 2
 ```
+
+---
+
+[View Interview Questions](./interview.md)

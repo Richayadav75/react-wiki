@@ -33,3 +33,7 @@ const ThemeContext = createContext('light');
 // 3. Use Value (in any child)
 const theme = useContext(ThemeContext);
 ```
+
+---
+
+[View Interview Questions](./interview.md)

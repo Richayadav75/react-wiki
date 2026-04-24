@@ -72,3 +72,7 @@ function useSearch(items: string[]) {
 
 - [React Docs — useCallback](https://react.dev/reference/react/useCallback)
 - [When to useMemo and useCallback — Kent C. Dodds](https://kentcdodds.com/blog/usememo-and-usecallback)
+
+---
+
+[View Interview Questions](./interview.md)
