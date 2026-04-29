@@ -1,3 +1,9 @@
+- category: Basic Concepts
+- track: Fundamentals
+- difficulty: Beginner
+- related: variables, data-types
+
+
 JavaScript is a programming language that makes websites interactive. Think of it like this:
 
 - **HTML** = skeleton of a webpage (structure)
@@ -5,7 +11,7 @@ JavaScript is a programming language that makes websites interactive. Think of i
 - **JavaScript** = muscles (makes things move/work)
 
 
-![Concept](concept.png)
+![Concept](./concept.png)
 
 
 

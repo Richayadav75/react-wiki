@@ -1,4 +1,5 @@
-- Category: Core Concepts
+- Category: JavaScript
+- Track: JavaScript
 - Difficulty: Intermediate
 - Related: closures
 

@@ -1,6 +1,8 @@
-- Category: Hooks
-- Difficulty: Beginner
-- Related: useReducer, useRef
+- name: useState Hook
+- category: Hooks - State
+- track: React
+- difficulty: Beginner
+- related: useReducer, useRef
 
 ### What is useState?
 `useState` is the most fundamental React Hook. It allows you to add "state" (data that changes) to your functional components.

@@ -10,14 +10,14 @@ A curated reference hub for learning Programming, JavaScript, and React concepts
 
 | Topic | Category | Track | Difficulty |
 |-------|----------|-------|------------|
-| [basic-javascript](./basic-javascript/) | Fundamentals | JavaScript |  Beginner |
+| [basic-programming](./basic-programming/) | Fundamentals| JavaScript | Beginner |
 | [variables](./variables/) | Fundamentals | JavaScript |  Beginner |
 | [operators](./operators/) | Fundamentals | JavaScript | Beginner |
 | [data-types](./data-types/) | Fundamentals | JavaScript | Beginner |
 | [conditionals](./conditionals/) | Fundamentals | JavaScript | Beginner |
 | [loops](./loops/) | Fundamentals | JavaScript | Beginner |
-| [props-vs-state](./props-vs-state/) | Fundamentals | React | Beginner |
-| [component-lifecycle](./component-lifecycle/) | Fundamentals | React | Beginner |
+| [props-vs-state](./props-vs-state/) | React Fundamentals | React | Beginner |
+| [component-lifecycle](./component-lifecycle/) | React Fundamentals | React | Beginner |
 | [useState](./useState/) | Hooks | React | Beginner |
 | [useEffect](./useEffect/) | Hooks | React | Beginner |
 | [useRef](./useRef/) | Hooks | React | Intermediate |

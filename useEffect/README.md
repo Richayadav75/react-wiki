@@ -1,6 +1,8 @@
-- Category: Hooks
-- Difficulty: Beginner
-- Related: useState
+- name: useEffect Hook
+- category: Hooks - Side Effects
+- track: React
+- difficulty: Beginner
+- related: useState
 
 ### What is useEffect?
 `useEffect` allows you to perform "side effects" in your components, such as data fetching, subscriptions, or manually changing the DOM.

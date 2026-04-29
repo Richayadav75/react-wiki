@@ -1,4 +1,4 @@
-- Category: Fundamentals
+- Category: React Fundamentals
 - Difficulty: Beginner
 - Related: useState, useContext
 

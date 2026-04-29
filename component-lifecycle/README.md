@@ -1,6 +1,8 @@
-- Category: Fundamentals
-- Difficulty: Beginner
-- Related: useEffect, useState
+- name: Component Lifecycle
+- category: React Fundamentals
+- track: React
+- difficulty: Beginner
+- related: useEffect, useState
 
 React function components don't have explicit lifecycle methods like class components, but they go through the same phases: **Mount → Update → Unmount**. Understanding how these map to hooks is key to avoiding bugs.
 
