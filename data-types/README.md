@@ -6,13 +6,10 @@
 ### What are Data Types?
 Data types define the nature of data being stored. JavaScript has **Primitives** and **Reference** types.
 
----
 
 ### 1. Primitive Types
 **Theory**: Primitives are the most basic data types in JavaScript. They are immutable, meaning once assigned, they cannot be changed. If you try to modify a primitive variable, you are actually creating a new variable with the new value.  
 The most basic, unchangeable data types stored by value.
-
-
 
 **Key Features**:
 - **Number**: Integers and decimals (`10`, `3.14`).
@@ -67,12 +64,9 @@ boolean
 object
 undefined
 ```
----
 
 ### 2. Reference Types
 **Theory**: Complex structures that can store multiple values and are stored by reference in memory.
-
-
 
 **Key Features**:
 - **Objects**: Collections of key-value pairs.
@@ -85,5 +79,4 @@ let colors = ["Red", "Blue", "Green"];
 ```
 
 ---
-
 [View Interview Questions](./interview.md)

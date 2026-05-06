@@ -6,7 +6,6 @@
 ### What are Operators?
 Operators are symbols that perform operations on data. We categorize them by their purpose.
 
----
 
 ### 1. Arithmetic Operators
 **Theory**: These perform standard math. The % (modulo) and ** (exponent) operators are the ones new learners often miss.
@@ -48,7 +47,6 @@ Increment shorthand — same as x = x + 1.
 `x--`
 Decrement shorthand — same as x = x - 1.
 
----
 
 ### 2. Comparison Operators
 **Theory**: Used to compare two values, resulting in `true` or `false`.
@@ -87,7 +85,6 @@ Loose equality: JS converts string to number first. Avoid ==.
 `5 !== 6 // true`
 Strict not-equal. Use !== instead of !=.
 
----
 
 ### 3. Logical Operators
 **Theory**: Combine conditions. && (AND), || (OR), ! (NOT). They also return the actual values, not just true/false — useful for default values.

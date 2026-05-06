@@ -6,7 +6,6 @@
 ### What are Variables?
 Variables are named storage for data. In modern JavaScript, we have three distinct ways to create them, each with unique behaviors.
 
----
 
 ### 1. var (The Legacy Way)
 **Theory**: Before 2015, var was the only way to declare a variable. It has function scope and gets hoisted — both cause tricky bugs. Avoid in modern code.
@@ -49,7 +48,6 @@ Alice
 25
 true
 ```
----
 
 ### 2. let (The Modern Standard)
 **Theory**: Introduced in ES6 to fix the issues with `var`. It is block-scoped, meaning it only exists within `{ }`.
@@ -90,7 +88,6 @@ Reassignment — no keyword needed, just variable = newValue.
 
 `message = "world";`
 Strings can be reassigned the same way.
----
 
 ### 3. const (The Constant)
 **Theory**: Used for values that should never change throughout the program.

@@ -56,7 +56,6 @@ Calling the function — 'Alice' replaces name inside the function.
 `let result = sayHi();`
 A function without return implicitly returns undefined.
 
--------------------------------------------
 
 ### 2. Function expression & default params:
 **Theory**: A function stored in a variable is a function expression. Not hoisted. Default parameters handle missing arguments gracefully.

@@ -50,7 +50,6 @@ NaN
 truthy!
 never
 ```
----
 
 ### 2. what is explicit type coercion?
 **Theory**: Always convert explicitly when mixing types. Number(), String(), Boolean() are the safe tools. typeof tells you what type something is.
@@ -119,7 +118,5 @@ false
 "boolean"
 "undefined"
 ```
-
----
 
 [View Interview Questions](./interview.md)

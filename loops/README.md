@@ -6,7 +6,6 @@
 ### What are Loops?
 Loops repeat a block of code multiple times. This is essential for handling lists or repetitive tasks.
 
----
 
 ### 1. For Loop
 **Theory**: Best when you know exactly how many times you want to repeat.
@@ -30,7 +29,6 @@ for (let i = 1; i <= 5; i++) {
 }
 ```
 
----
 
 ### 2. While Loop
 **Theory**: Runs as long as a condition is true. Best for unknown durations.
