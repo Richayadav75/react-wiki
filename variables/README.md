@@ -9,7 +9,8 @@ Variables are named storage for data. In modern JavaScript, we have three distin
 ---
 
 ### 1. var (The Legacy Way)
-**Theory**: Before ES6, `var` was the only way to declare variables. It is function-scoped and allows re-declaration.
+**Theory**: Before 2015, var was the only way to declare a variable. It has function scope and gets hoisted — both cause tricky bugs. Avoid in modern code.
+
 
 **Key Features**:
 - **Scope**: Function-scoped (accessible anywhere in the function).
@@ -18,15 +19,38 @@ Variables are named storage for data. In modern JavaScript, we have three distin
 
 **Example**:
 ```javascript
-var name = "Richa";
-var name = "Yadav"; // No error, it just overwrites
-console.log(name); // Yadav
+var name = "Alice";   // declaring a variable
+var age  = 25;        // storing a number
+var active = true;    // storing a boolean
+
+console.log(name);    // → Alice
+console.log(age);     // → 25
+console.log(active);  // → true
+
+var name = "Alice";
+Keyword var, then the name, then = to assign, then the value.
+var age = 25;
+No quotes → number. With quotes → string.
+var active = true;
+true and false (no quotes) are boolean values.
+console.log(name);
+Prints the value to the browser console.
 ```
 
+**Output**:
+```
+Alice
+25
+true
+```
 ---
 
 ### 2. let (The Modern Standard)
 **Theory**: Introduced in ES6 to fix the issues with `var`. It is block-scoped, meaning it only exists within `{ }`.
+
+let is the modern replacement for var when a value might change. It is scoped to the nearest {} block, so it's safer and more predictable.
+
+
 
 **Key Features**:
 - **Scope**: Block-scoped (limited to the nearest curly braces).
@@ -35,16 +59,34 @@ console.log(name); // Yadav
 
 **Example**:
 ```javascript
-let score = 10;
-score = 20; // Allowed: Update value
-// let score = 30; // ERROR! Cannot re-declare
-console.log(score); // 20
+let score = 0;          // starts at 0
+score = 10;             // we can update it
+let message = "hello";
+message = "world";      // also updatable
+
+console.log(score);     // → 10
+console.log(message);   // → world
 ```
 
+**Output**:
+```
+10
+world
+```
+
+```
+let score = 0;
+Declare with let. Value can change later.
+score = 10;
+Reassignment — no keyword needed, just variable = newValue.
+message = "world";
+Strings can be reassigned the same way.
+```
 ---
 
 ### 3. const (The Constant)
 **Theory**: Used for values that should never change throughout the program.
+const means the binding cannot be reassigned. Use it by default — switch to let only when you know the value will change.
 
 **Key Features**:
 - **Fixed Value**: Once assigned, it cannot be changed.
@@ -53,9 +95,22 @@ console.log(score); // 20
 
 **Example**:
 ```javascript
-const PI = 3.14;
-// PI = 4; // ERROR! Constant cannot change
-console.log(PI);
+const PI = 3.14159;       // mathematical constant
+const userName = "Bob";   // won't change
+
+// PI = 3; ← this would throw a TypeError!
+
+const colors = ["red", "blue"];
+colors.push("green");     // arrays CAN be mutated
+console.log(colors);      // → ["red","blue","green"]
+const PI = 3.14159;
+Constant — trying to reassign throws a TypeError at runtime.
+const colors = ["red", "blue"];
+The array reference is constant, but its contents can change.
+colors.push("green");
+.push adds to the array — this is mutation, not reassignment.
+
+
 ```
 
 ---
