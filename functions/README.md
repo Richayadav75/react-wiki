@@ -30,10 +30,8 @@ function sayHi() {
 }
 let result = sayHi();
 console.log(result);           // → undefined
-
 ```
 **Output**:
-```
 greet("Alice") → "Hello, 
 Alice!" 
 greet("Bob") → "Hello, 
@@ -41,10 +39,8 @@ Bob!"
 add(3, 7) → 10 
 sayHi() 
 result → undefined
-```
 
 **Explanation**:
-```
 function greet(name) {
 function keyword, then name, then parameters in (). name is a placeholder — it gets the value you pass when calling.
 return "Hello, " + name + "!";
@@ -53,10 +49,10 @@ greet("Alice")
 Calling the function — 'Alice' replaces name inside the function.
 let result = sayHi();
 A function without return implicitly returns undefined.
-```
+
 -------------------------------------------
 
-### Function expression & default params
+### 2. Function expression & default params:
 **Theory**: A function stored in a variable is a function expression. Not hoisted. Default parameters handle missing arguments gracefully.
 
 **Example**:
@@ -78,8 +74,14 @@ function greet(name = "stranger", greeting = "Hello") {
 console.log(greet());               // → Hello, stranger!
 console.log(greet("Ana"));          // → Hello, Ana!
 console.log(greet("Ana", "Hi"));    // → Hi, Ana!
-
 ```
+**Output**:
+square(4) → 16 
+cube(3) → 27 
+greet() → "Hello, stranger!" 
+greet("Ana") → "Hello, Ana!" 
+greet("Ana","Hi") → "Hi, Ana!"
+
 **Explanation**:
 const square = function(x) {
 Function stored in a variable. Can't be called before this line (not hoisted).
@@ -89,16 +91,5 @@ name = "stranger"
 Default value used when argument is missing or undefined.
 greet("Ana")
 Only first arg given — greeting uses its default 'Hello'.
-```
 
-**Output**:
-square(4) → 16 
-cube(3) → 27 
-greet() → "Hello, stranger!" 
-greet("Ana") → "Hello, Ana!" 
-greet("Ana","Hi") → "Hi, Ana!"
-```
-Click the topic tabs at the top to switch between the 5 foundation topics
-Click any concept card to expand it — you'll see the code, then a line-by-line breakdown of what each part does
-Hit "Run example" to execute the code live and see real output
 ---
