@@ -22,17 +22,24 @@ console.log("abc" * 2);    // → NaN (Not a Number)
 if ("hello") console.log("truthy!");  // → truthy!
 if (0)       console.log("never");   // 0 is falsy
 
-"5" + 3  // → "53"
-JS converts 3 to "3" before adding. String concatenation wins over arithmetic.
-"5" - 2  // → 3
-No string-to-number conversion rule here, so JS treats both as numbers.
-"abc" * 2 // → NaN
-"abc" cannot be converted to a number, so multiplication fails → NaN.
-"hello"   // truthy
-Any non-empty string is truthy. It coerces to true in conditions.
-if (0) ...        // falsy
-Zero is one of the few values that coerces to false.
 ```
+
+**Explanation**:
+
+`"5" + 3  // → "53"`
+JS converts 3 to "3" before adding. String concatenation wins over arithmetic.
+
+`"5" - 2  // → 3`
+No string-to-number conversion rule here, so JS treats both as numbers.
+
+`"abc" * 2 // → NaN`
+"abc" cannot be converted to a number, so multiplication fails → NaN.
+
+`"hello"   // truthy`
+Any non-empty string is truthy. It coerces to true in conditions.
+
+`if (0) ...        // falsy`
+Zero is one of the few values that coerces to false.
 **Output**:
 ```
 53
@@ -73,19 +80,27 @@ console.log(typeof "hi");    // → "string"
 console.log(typeof true);    // → "boolean"
 console.log(typeof undefined); // → "undefined"
 
-Number("42") // → 42
-Converts string to number. Returns NaN if invalid.
-parseInt("10px") // → 10
-Parses integer from start of string. Stops at non-digits.
-String(42) // → "42"
-Converts anything to string.
-(42).toString() // → "42"
-Alternative way for numbers.
-Boolean(0) // → false
-Boolean(""), null, undefined, 0, NaN are falsy. Everything else is truthy.
-typeof 42 // → "number"
-Returns the type as a string. Note: typeof null is "object" (a bug).
 ```
+
+**Explanation**:
+
+`Number("42") // → 42`
+Converts string to number. Returns NaN if invalid.
+
+`parseInt("10px") // → 10`
+Parses integer from start of string. Stops at non-digits.
+
+`String(42) // → "42"`
+Converts anything to string.
+
+`(42).toString() // → "42"`
+Alternative way for numbers.
+
+`Boolean(0) // → false`
+Boolean(""), null, undefined, 0, NaN are falsy. Everything else is truthy.
+
+`typeof 42 // → "number"`
+Returns the type as a string. Note: typeof null is "object" (a bug).
 **Output**:
 ```
 42

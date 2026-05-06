@@ -34,15 +34,21 @@ if (temperature > 40) {
 let x = 10;
 if (x > 5) console.log("big");  // → big
 
-if (temperature > 40) {
-Evaluates the condition. If true, runs this block and skips all others.
-} else if (temperature > 30) {
-Only checked if the first if was false. 35 > 30, so this runs.
-} else {
-Fallback — runs only if every condition above was false.
-if (x > 5) console.log("big");
-Single-line form. Fine for simple cases, use braces for multi-line.
 ```
+
+**Explanation**:
+
+`if (temperature > 40) {`
+Evaluates the condition. If true, runs this block and skips all others.
+
+`} else if (temperature > 30) {`
+Only checked if the first if was false. 35 > 30, so this runs.
+
+`} else {`
+Fallback — runs only if every condition above was false.
+
+`if (x > 5) console.log("big");`
+Single-line form. Fine for simple cases, use braces for multi-line.
 
 ---
 
@@ -73,16 +79,21 @@ switch (day) {
     console.log("Weekday");
 }
 
-switch (day) {
-Evaluates day once, then jumps to the matching case.
-case "Saturday": case "Sunday":
-Two cases with no break between them — both lead to the same block (fall-through on purpose).
-break;
-Exits the switch. Without break, execution falls through to the next case.
-default:
-Runs when no case matches. Like else in if/else.
-
 ```
+
+**Explanation**:
+
+`switch (day) {`
+Evaluates day once, then jumps to the matching case.
+
+`case "Saturday": case "Sunday":`
+Two cases with no break between them — both lead to the same block (fall-through on purpose).
+
+`break;`
+Exits the switch. Without break, execution falls through to the next case.
+
+`default:`
+Runs when no case matches. Like else in if/else.
 ### 3. for loop 
 **Theory**: The classic loop. Three parts in the (): initializer, condition checked before each pass, update run after each pass.
 
@@ -105,16 +116,21 @@ for (let fruit of fruits) {
   console.log(fruit);
 }
 
-let i = 1; i <= 5; i++
-Start at 1. Keep going while i <= 5. Add 1 after each iteration.
-i < fruits.length
-fruits.length is 3. Loop runs for i=0, i=1, i=2 then stops.
-fruits[i]
-Access array element by index. fruits[0] = 'apple', fruits[1] = 'banana', etc.
-for (let fruit of fruits)
-for...of gives you the value directly — no index needed. Use for arrays.
-
 ```
+
+**Explanation**:
+
+`let i = 1; i <= 5; i++`
+Start at 1. Keep going while i <= 5. Add 1 after each iteration.
+
+`i < fruits.length`
+fruits.length is 3. Loop runs for i=0, i=1, i=2 then stops.
+
+`fruits[i]`
+Access array element by index. fruits[0] = 'apple', fruits[1] = 'banana', etc.
+
+`for (let fruit of fruits)`
+for...of gives you the value directly — no index needed. Use for arrays.
 
 ### 4. while & do-while loops
 **Theory**: while checks the condition before each iteration. do-while always runs at least once — then checks.
@@ -141,15 +157,21 @@ for (let i = 0; i < 5; i++) {
   console.log(i);          // → 0 1 3
 }
 
-while (n <= 3) {
-Checks n <= 3 before entering. Once n becomes 4, exits.
-do { ... } while (attempt <= 3);
-Body runs first. Then checks. Useful for menus, retries.
-if (i === 2) continue;
-Skip the rest of this iteration, go to next i.
-if (i === 4) break;
-Exit the entire loop immediately.
 ```
+
+**Explanation**:
+
+`while (n <= 3) {`
+Checks n <= 3 before entering. Once n becomes 4, exits.
+
+`do { ... } while (attempt <= 3);`
+Body runs first. Then checks. Useful for menus, retries.
+
+`if (i === 2) continue;`
+Skip the rest of this iteration, go to next i.
+
+`if (i === 4) break;`
+Exit the entire loop immediately.
 
 
 ---

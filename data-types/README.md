@@ -38,19 +38,27 @@ console.log(typeof bool);    // → "boolean"
 console.log(typeof nothing); // → "object" ← JS quirk!
 console.log(typeof missing); // → "undefined"
 
-let str = "hello";
-String — text wrapped in quotes (single or double).
-let num = 42; let dec = 3.14;
-Number — integers and decimals share the same type in JS.
-let bool = true;
-Boolean — only two values: true or false.
-let nothing = null;
-Null — you set this intentionally to mean 'no value'.
-let missing = undefined;
-Undefined — variable declared but never assigned.
-typeof nothing // → 'object'
-Famous JS bug — typeof null returns 'object'. It's a historical mistake.
 ```
+
+**Explanation**:
+
+`let str = "hello";`
+String — text wrapped in quotes (single or double).
+
+`let num = 42; let dec = 3.14;`
+Number — integers and decimals share the same type in JS.
+
+`let bool = true;`
+Boolean — only two values: true or false.
+
+`let nothing = null;`
+Null — you set this intentionally to mean 'no value'.
+
+`let missing = undefined;`
+Undefined — variable declared but never assigned.
+
+`typeof nothing // → 'object'`
+Famous JS bug — typeof null returns 'object'. It's a historical mistake.
 **Output**:
 ```
 string
