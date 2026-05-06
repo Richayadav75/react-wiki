@@ -27,15 +27,21 @@ console.log(name);    // → Alice
 console.log(age);     // → 25
 console.log(active);  // → true
 
-var name = "Alice";
-Keyword var, then the name, then = to assign, then the value.
-var age = 25;
-No quotes → number. With quotes → string.
-var active = true;
-true and false (no quotes) are boolean values.
-console.log(name);
-Prints the value to the browser console.
 ```
+
+**Explanation**:
+
+`var name = "Alice";`
+Keyword var, then the name, then = to assign, then the value.
+
+`var age = 25;`
+No quotes → number. With quotes → string.
+
+`var active = true;`
+true and false (no quotes) are boolean values.
+
+`console.log(name);`
+Prints the value to the browser console.
 
 **Output**:
 ```
@@ -74,14 +80,16 @@ console.log(message);   // → world
 world
 ```
 
-```
-let score = 0;
+**Explanation**:
+
+`let score = 0;`
 Declare with let. Value can change later.
-score = 10;
+
+`score = 10;`
 Reassignment — no keyword needed, just variable = newValue.
-message = "world";
+
+`message = "world";`
 Strings can be reassigned the same way.
-```
 ---
 
 ### 3. const (The Constant)
@@ -103,15 +111,18 @@ const userName = "Bob";   // won't change
 const colors = ["red", "blue"];
 colors.push("green");     // arrays CAN be mutated
 console.log(colors);      // → ["red","blue","green"]
-const PI = 3.14159;
-Constant — trying to reassign throws a TypeError at runtime.
-const colors = ["red", "blue"];
-The array reference is constant, but its contents can change.
-colors.push("green");
-.push adds to the array — this is mutation, not reassignment.
-
-
 ```
+
+**Explanation**:
+
+`const PI = 3.14159;`
+Constant — trying to reassign throws a TypeError at runtime.
+
+`const colors = ["red", "blue"];`
+The array reference is constant, but its contents can change.
+
+`colors.push("green");`
+.push adds to the array — this is mutation, not reassignment.
 
 ---
 
