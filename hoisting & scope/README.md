@@ -97,7 +97,7 @@ console.log(multiply(2, 3));  // ✅ → 6
 ![Scope Chain](scope_chain.png)
 
 ![Hoisting](hoisting.png)
-```
+
 ---
 
 [View Interview Questions](./interview.md)

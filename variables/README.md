@@ -156,13 +156,14 @@ arr.push(4);             // ✅ mutation is fine
 console.log(arr);        // → [1, 2, 3, 4]
 ```
 ***Output:***
+```
 var after if-block   → "I escape!"
 var i after loop     → 3 (leaked!)
 let j after loop     → ReferenceError (correct)
 const arr after push → [1,2,3,4]
 const reassign       → TypeError (can't reassign)
-
-![var Table](./varTable1.png)
 ```
+![var Table](./varTable1.png)
+
 ---
-[View Interview Questions](./interview.md)
+[View Interview Questions](interview.md)
