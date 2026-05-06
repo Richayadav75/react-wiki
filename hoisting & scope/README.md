@@ -9,7 +9,7 @@
 `Real-world analogy`
 Think of scopes like rooms in a house. A variable is an object placed in a room. People in that room can use it. People in other rooms cannot — unless it's placed in the hallway (global scope) where everyone can reach it.
 
-![Scope](./scope.png)
+![scope](./scope.png)
 
 ***Example:***
 ```javascript
@@ -92,7 +92,11 @@ console.log(multiply(2, 3));  // ✅ → 6
 
 ![Table2](./table2.png)
 
-```
+**Working Flow**
+
+![Scope Chain](./scopechain.png)
+
+![Hoisting](./hoisting.png)
 
 ---
 

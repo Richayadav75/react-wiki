@@ -121,6 +121,48 @@ The array reference is constant, but its contents can change.
 `colors.push("green");`
 .push adds to the array — this is mutation, not reassignment.
 
----
 
+### var vs let vs const — scope differences
+All three declare variables but they have very different scoping rules. var ignores block boundaries. let and const respect every {}. This is the #1 source of beginner bugs.
+
+`Real-world analogy`
+var is like a gas leak — it seeps through walls (block boundaries) and spreads to the whole room (function). let and const stay exactly where you put them, inside the container they belong to.
+
+`Golden rule:` Always use const by default. Switch to let only when you know the value will change. Never use var in modern code.
+
+***Example:***
+```javascript
+// var leaks out of if-block
+if (true) {
+  var leaked = "I escape!";   // var ignores the {}
+  let safe   = "I stay";     // let respects the {}
+}
+console.log(leaked);  // → "I escape!"  (bad!)
+// console.log(safe); // ❌ ReferenceError (correct!)
+
+// Classic var bug in for-loops
+for (var i = 0; i < 3; i++) { /* loop body */ }
+console.log(i);  // → 3  (var i leaked out!)
+
+for (let j = 0; j < 3; j++) { /* loop body */ }
+// console.log(j); // ❌ ReferenceError — j is gone
+
+// const — value cannot be reassigned
+const PI = 3.14159;
+// PI = 3;  // ❌ TypeError: Assignment to constant
+
+const arr = [1, 2, 3];
+arr.push(4);             // ✅ mutation is fine
+console.log(arr);        // → [1, 2, 3, 4]
+```
+***Output:***
+var after if-block   → "I escape!"
+var i after loop     → 3 (leaked!)
+let j after loop     → ReferenceError (correct)
+const arr after push → [1,2,3,4]
+const reassign       → TypeError (can't reassign)
+
+![var Table](./varTable1.png)
+```
+---
 [View Interview Questions](./interview.md)
