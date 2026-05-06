@@ -99,7 +99,6 @@ console.log(multiply(2, 3));  // ✅ → 6
 ### Note
 ![Hoisting](excalidraw-hoisting.png)
 
-Hoisting is JavaScript's default behavior of moving declarations to the top. This mental model helps in understanding why we can call functions before they are defined, or why `var` variables return `undefined` instead of throwing an error when accessed early.
 
 ---
 
