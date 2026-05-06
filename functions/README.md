@@ -32,6 +32,7 @@ let result = sayHi();
 console.log(result);           // → undefined
 ```
 **Output**:
+```
 greet("Alice") → "Hello, 
 Alice!" 
 greet("Bob") → "Hello, 
@@ -39,15 +40,20 @@ Bob!"
 add(3, 7) → 10 
 sayHi() 
 result → undefined
+```
 
 **Explanation**:
-function greet(name) {
+
+`function greet(name) {`
 function keyword, then name, then parameters in (). name is a placeholder — it gets the value you pass when calling.
-return "Hello, " + name + "!";
+
+`return "Hello, " + name + "!";`
 return sends a value back to the caller. Execution stops here.
-greet("Alice")
+
+`greet("Alice")`
 Calling the function — 'Alice' replaces name inside the function.
-let result = sayHi();
+
+`let result = sayHi();`
 A function without return implicitly returns undefined.
 
 -------------------------------------------
@@ -76,20 +82,25 @@ console.log(greet("Ana"));          // → Hello, Ana!
 console.log(greet("Ana", "Hi"));    // → Hi, Ana!
 ```
 **Output**:
+```
 square(4) → 16 
 cube(3) → 27 
 greet() → "Hello, stranger!" 
 greet("Ana") → "Hello, Ana!" 
 greet("Ana","Hi") → "Hi, Ana!"
-
+```
 **Explanation**:
-const square = function(x) {
+
+`const square = function(x) {`
 Function stored in a variable. Can't be called before this line (not hoisted).
-const cube = (x) => x * x * x;
+
+`const cube = (x) => x * x * x;`
 Arrow function with implicit return. No braces = single expression returned.
-name = "stranger"
+
+`name = "stranger"`
 Default value used when argument is missing or undefined.
-greet("Ana")
+
+`greet("Ana")`
 Only first arg given — greeting uses its default 'Hello'.
 
 ---
