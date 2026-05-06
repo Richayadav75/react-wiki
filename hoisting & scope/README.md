@@ -9,7 +9,7 @@
 `Real-world analogy`
 Think of scopes like rooms in a house. A variable is an object placed in a room. People in that room can use it. People in other rooms cannot — unless it's placed in the hallway (global scope) where everyone can reach it.
 
-![scope](./scope.png)
+![scope](scope.png)
 
 ***Example:***
 ```javascript
@@ -43,7 +43,7 @@ city in kitchen → "Mumbai"
 city in bedroom → "Mumbai"
 food in bedroom → ReferenceError (can't cross functions)
 ```
-![Table](./table.png)
+![Table](table.png)
 
 ### What is Hoisting?
 `Hoisting` = Before running any code, JS does a first pass and registers all declarations. This is called hoisting. Function declarations are fully hoisted. var is hoisted but undefined. let/const are hoisted but locked (Temporal Dead Zone).
@@ -51,7 +51,7 @@ food in bedroom → ReferenceError (can't cross functions)
 `Real-world analogy`
 Imagine a teacher scans the attendance sheet before class starts. They know every student exists (hoisted) — but students haven't answered questions yet. var students get marked "present but silent" (undefined). let/const students are marked "do not call yet — TDZ". function declarations are fully ready from the start. You can call a function before defining it.
 
-![Scope2](./scope2.png)
+![Scope2](scope2.png)
 
 ***Example***
 ```javascript
@@ -90,14 +90,14 @@ console.log(multiply(2, 3));  // ✅ → 6
 5. multiply(2,3)                → 6
 ```
 
-![Table2](./table2.png)
+![Table2](table2.png)
 
 **Working Flow**
 
-![Scope Chain](./scopechain.png)
+![Scope Chain](scope_chain.png)
 
-![Hoisting](./hoisting.png)
-
+![Hoisting](hoisting.png)
+```
 ---
 
 [View Interview Questions](./interview.md)
