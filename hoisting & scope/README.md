@@ -45,6 +45,57 @@ food in bedroom → ReferenceError (can't cross functions)
 ```
 ![Table](table.png)
 
+### Scope Chain
+`Scope Chain` = When JS looks for a variable, it doesn't only check the current scope. It walks outward through every parent scope until it finds the variable or reaches global and gives up `(ReferenceError)`.
+
+`Real-world analogy` You're searching for your keys. First check your pocket (local). Not there? Check the room (function scope). Not there? Check the hallway (global). Still not there? Keys are lost `(ReferenceError)`.
+
+![Scope Chain](scope-chain1.png)
+
+***Example:***
+```javascript
+let a = "global A";
+
+function outer() {
+  let b = "outer B";
+
+  function inner() {
+    let c = "inner C";
+
+    console.log(a);  // ✅ → "global A"  (3 levels up)
+    console.log(b);  // ✅ → "outer B"  (1 level up)
+    console.log(c);  // ✅ → "inner C"  (same scope)
+  }
+
+  inner();
+  console.log(b);  // ✅ → "outer B"
+  // console.log(c); // ❌ outer can't see inside inner
+}
+
+outer();
+// console.log(b); // ❌ global can't see inside outer
+
+```
+
+***Output:***
+```
+inner sees a → "global A"
+inner sees b → "outer B"
+inner sees c → "inner C"
+outer sees b → "outer B"
+outer sees c → ReferenceError (can't look inside inner)
+global sees a → "global A"
+global sees b → ReferenceError (can't look inside outer)
+
+```
+
+![Scope Chain feat](scope-chain-feat.png)
+
+
+***Key Rule**
+`Key rule:` Scope chain goes INWARD → OUTWARD only. A child can see its parent. A parent CANNOT see inside a child. Siblings cannot see each other.
+
+
 ### What is Hoisting?
 `Hoisting` = Before running any code, JS does a first pass and registers all declarations. This is called hoisting. Function declarations are fully hoisted. var is hoisted but undefined. let/const are hoisted but locked (Temporal Dead Zone).
 
@@ -99,6 +150,79 @@ console.log(multiply(2, 3));  // ✅ → 6
 ### Note
 ![Hoisting](excalidraw-hoisting.png)
 
+
+### Real-world Scope & hoisting bugs
+These are the exact mistakes that trip up developers in real projects. Recognising them saves hours of debugging.
+
+***Example:***
+
+```javascript
+// BUG 1: var in a loop — all callbacks share the same i
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+// prints: 3, 3, 3  ← NOT 0, 1, 2!
+// By the time setTimeout runs, loop is done, i = 3
+
+// FIX: use let — creates a new i for each iteration
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+// prints: 0, 1, 2  ✅
+
+// BUG 2: Accidental global variable
+function setName() {
+  name = "Alice";   // forgot let/const — creates global!
+}
+setName();
+console.log(name);  // → "Alice" (leaked to global!)
+
+// FIX: always declare variables
+function setNameFixed() {
+  let name = "Alice";   // safely scoped to function
+}
+
+// BUG 3: var hoisting giving undefined
+function calculate() {
+  console.log(result);  // → undefined (not an error!)
+  var result = 42;
+  console.log(result);  // → 42
+}
+
+// BUG 4: Shadowing — inner variable hides outer
+let value = "outer";
+function test() {
+  let value = "inner";    // shadows outer value
+  console.log(value);     // → "inner"
+}
+test();
+console.log(value);       // → "outer" (unchanged)
+```
+***Output:***
+```
+var result before assignment → undefined
+var result after assignment  → 42
+inner value → "inner"
+outer value after test() → "outer"
+
+var loop bug → would print 3,3,3 (setTimeout deferred)
+let loop fix → would print 0,1,2 (fresh binding each iteration)
+```
+
+![Real World Bugs](real-world-bugs.png)
+
+***Best Practices summary:**
+1. Always use const first, let if needed, never var
+2. Always declare variables (never omit keyword)
+3. Declare variables at the TOP of their scope — avoids hoisting confusion
+4. Use different names in inner/outer scopes to avoid shadowing bugs
+
+
+**Common Mistakes:**
+1. Using let/const before declaration (TDZ)
+2. Accessing variables in wrong scopes
+3. Thinking var makes code "flexible" (it actually creates bugs)
+4. Not understanding that functions are hoisted but expressions are not
 
 ---
 
