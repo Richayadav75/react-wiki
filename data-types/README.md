@@ -8,7 +8,8 @@ Data types define the nature of data being stored. JavaScript has **Primitives**
 
 
 ### 1. Primitive Types
-**Theory**: Primitives are the most basic data types in JavaScript. They are immutable, meaning once assigned, they cannot be changed. If you try to modify a primitive variable, you are actually creating a new variable with the new value.  
+**Theory**: Primitives are the most basic data types in JavaScript. 
+They are immutable, meaning once assigned, they cannot be changed. If you try to modify a primitive variable, you are actually creating a new variable with the new value.  
 The most basic, unchangeable data types stored by value.
 
 **Key Features**:
@@ -37,6 +38,15 @@ console.log(typeof missing); // → "undefined"
 
 ```
 
+**Output**:
+```
+string
+number
+boolean
+object
+undefined
+```
+
 **Explanation**:
 
 `let str = "hello";`
@@ -56,14 +66,6 @@ Undefined — variable declared but never assigned.
 
 `typeof nothing // → 'object'`
 Famous JS bug — typeof null returns 'object'. It's a historical mistake.
-**Output**:
-```
-string
-number
-boolean
-object
-undefined
-```
 
 ### 2. Reference Types
 **Theory**: Complex structures that can store multiple values and are stored by reference in memory.

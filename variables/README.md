@@ -55,7 +55,6 @@ true
 let is the modern replacement for var when a value might change. It is scoped to the nearest {} block, so it's safer and more predictable.
 
 
-
 **Key Features**:
 - **Scope**: Block-scoped (limited to the nearest curly braces).
 - **Updateable**: You can change the value, but NOT re-declare the name.
@@ -71,13 +70,6 @@ message = "world";      // also updatable
 console.log(score);     // → 10
 console.log(message);   // → world
 ```
-
-**Output**:
-```
-10
-world
-```
-
 **Explanation**:
 
 `let score = 0;`
@@ -88,6 +80,12 @@ Reassignment — no keyword needed, just variable = newValue.
 
 `message = "world";`
 Strings can be reassigned the same way.
+
+**Output**:
+```
+10
+world
+```
 
 ### 3. const (The Constant)
 **Theory**: Used for values that should never change throughout the program.
@@ -109,6 +107,11 @@ const colors = ["red", "blue"];
 colors.push("green");     // arrays CAN be mutated
 console.log(colors);      // → ["red","blue","green"]
 ```
+**Output**:
+```
+3.14159
+["red","blue","green"]
+```
 
 **Explanation**:
 
@@ -125,8 +128,8 @@ The array reference is constant, but its contents can change.
 ### var vs let vs const — scope differences
 All three declare variables but they have very different scoping rules. var ignores block boundaries. let and const respect every {}. This is the #1 source of beginner bugs.
 
-`Real-world analogy`
-var is like a gas leak — it seeps through walls (block boundaries) and spreads to the whole room (function). let and const stay exactly where you put them, inside the container they belong to.
+> `Real-world analogy`
+> var is like a gas leak — it seeps through walls (block boundaries) and spreads to the whole room (function). let and const stay exactly where you put them, inside the container they belong to.
 
 `Golden rule:` Always use const by default. Switch to let only when you know the value will change. Never use var in modern code.
 

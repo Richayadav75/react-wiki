@@ -6,10 +6,10 @@
 ### What is scope?
 `Scope` = the region of code where a variable lives and can be used. Every variable you declare exists in exactly one scope. Code outside that scope simply cannot see it.
 
-`Real-world analogy`
-Think of scopes like rooms in a house. A variable is an object placed in a room. People in that room can use it. People in other rooms cannot — unless it's placed in the hallway (global scope) where everyone can reach it.
+> `Real-world analogy`
+> Think of scopes like rooms in a house. A variable is an object placed in a room. People in that room can use it. People in other rooms cannot — unless it's placed in the hallway (global scope) where everyone can reach it.
 
-![scope](scope.png)
+![scope (small)](scope.png)
 
 ***Example:***
 ```javascript
@@ -48,9 +48,9 @@ food in bedroom → ReferenceError (can't cross functions)
 ### Scope Chain
 `Scope Chain` = When JS looks for a variable, it doesn't only check the current scope. It walks outward through every parent scope until it finds the variable or reaches global and gives up `(ReferenceError)`.
 
-`Real-world analogy` You're searching for your keys. First check your pocket (local). Not there? Check the room (function scope). Not there? Check the hallway (global). Still not there? Keys are lost `(ReferenceError)`.
+> `Real-world analogy` You're searching for your keys. First check your pocket (local). Not there? Check the room (function scope). Not there? Check the hallway (global). Still not there? Keys are lost `(ReferenceError)`.
 
-![Scope Chain](scope-chain1.png)
+![Scope Chain (small)](scope-chain1.png)
 
 ***Example:***
 ```javascript
@@ -99,10 +99,10 @@ global sees b → ReferenceError (can't look inside outer)
 ### What is Hoisting?
 `Hoisting` = Before running any code, JS does a first pass and registers all declarations. This is called hoisting. Function declarations are fully hoisted. var is hoisted but undefined. let/const are hoisted but locked (Temporal Dead Zone).
 
-`Real-world analogy`
-Imagine a teacher scans the attendance sheet before class starts. They know every student exists (hoisted) — but students haven't answered questions yet. var students get marked "present but silent" (undefined). let/const students are marked "do not call yet — TDZ". function declarations are fully ready from the start. You can call a function before defining it.
+> `Real-world analogy`
+> Imagine a teacher scans the attendance sheet before class starts. They know every student exists (hoisted) — but students haven't answered questions yet. var students get marked "present but silent" (undefined). let/const students are marked "do not call yet — TDZ". function declarations are fully ready from the start. You can call a function before defining it.
 
-![Scope2](scope2.png)
+![Scope2 (small)](scope2.png)
 
 ***Example***
 ```javascript
@@ -141,7 +141,7 @@ console.log(multiply(2, 3));  // ✅ → 6
 5. multiply(2,3)                → 6
 ```
 
-![Table2](table2.png)
+![Table2 (small)](table2.png)
 
 **Working Flow**
 
@@ -209,13 +209,13 @@ var loop bug → would print 3,3,3 (setTimeout deferred)
 let loop fix → would print 0,1,2 (fresh binding each iteration)
 ```
 
-![Real World Bugs](real-world-bugs.png)
+![Real World Bugs (small)](real-world-bugs.png)
 
-***Best Practices summary:**
-1. Always use const first, let if needed, never var
-2. Always declare variables (never omit keyword)
-3. Declare variables at the TOP of their scope — avoids hoisting confusion
-4. Use different names in inner/outer scopes to avoid shadowing bugs
+> **Best Practices summary:**
+> 1. Always use const first, let if needed, never var
+> 2. Always declare variables (never omit keyword)
+> 3. Declare variables at the TOP of their scope — avoids hoisting confusion
+> 4. Use different names in inner/outer scopes to avoid shadowing bugs
 
 
 **Common Mistakes:**

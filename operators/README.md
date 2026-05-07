@@ -30,7 +30,18 @@ let x = 5;
 x++;           // x is now 6  (increment)
 x--;           // x is now 5  (decrement)
 console.log(x); // → 5
+```
 
+**Output**:
+```
+13
+7
+30
+3.3333333333333335
+1
+1000
+6
+5
 ```
 
 **Explanation**:
@@ -53,7 +64,6 @@ Decrement shorthand — same as x = x - 1.
 Comparisons return true or false. The critical one to learn is === (strict equality) — it checks value AND type. Avoid == which does type coercion.
 
 
-
 **Key Features**:
 - **Equality**: `===` (Strictly equal in value and type).
 - **Greater/Less**: `>`, `<`, `>=`, `<=`.
@@ -71,6 +81,15 @@ console.log(5 >= 5);      // → true  (greater or equal)
 console.log(4 <= 3);      // → false (less or equal)
 ```
 
+**Output**:
+```
+5 === 5 → true
+5 === "5" → false
+5 == "5" → true (dangerous)
+5 !== 6 → true
+10 > 3 → true
+5 >= 5 → true
+```
 **Explanation**:
 
 `5 === 5 // true`
@@ -118,6 +137,15 @@ let shown = count ?? 10;   // → 0  (0 is not null!)
 console.log(shown);
 ```
 
+**Output**:
+```
+age>=18 && hasID → true
+age<18 || hasID → true
+!hasID → false
+"" || "Guest" → "Guest"
+0 ?? 10 → 0
+```
+
 **Explanation**:
 
 `age >= 18 && hasID // true`
@@ -154,7 +182,11 @@ console.log(x);  // → 6
 let score = 75;
 let result = score >= 50 ? "Pass" : "Fail";
 console.log(result);  // → "Pass"
+```
 
+**Output**:
+```
+x after +=5 -=3 *=2 /=4 → 6 score 75 → "Pass"
 ```
 
 **Explanation**:

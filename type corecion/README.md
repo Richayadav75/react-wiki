@@ -24,6 +24,17 @@ if (0)       console.log("never");   // 0 is falsy
 
 ```
 
+**Output**:
+```
+"5" + 3 → "53"
+"5" - 2 → 3
+"5" * 2 → 10
+"abc" * 2 → NaN
+!!"hello" → true
+!!0 → false
+!!"" → false
+```
+
 **Explanation**:
 
 `"5" + 3  // → "53"`
@@ -40,16 +51,6 @@ Any non-empty string is truthy. It coerces to true in conditions.
 
 `if (0) ...        // falsy`
 Zero is one of the few values that coerces to false.
-**Output**:
-```
-53
-5true
-3
-10
-NaN
-truthy!
-never
-```
 
 ### 2. what is explicit type coercion?
 **Theory**: Always convert explicitly when mixing types. Number(), String(), Boolean() are the safe tools. typeof tells you what type something is.
@@ -102,21 +103,15 @@ Boolean(""), null, undefined, 0, NaN are falsy. Everything else is truthy.
 Returns the type as a string. Note: typeof null is "object" (a bug).
 **Output**:
 ```
-42
-3.14
-0
-NaN
-10
-"42"
-"true"
-"42"
-false
-true
-false
-"number"
-"string"
-"boolean"
-"undefined"
+Number("42") → 42
+Number("3.14") → 3.14
+Number("") → 0
+Number("hi") → NaN
+parseInt("10px") → 10
+String(42) → "42"
+Boolean(0) → false
+Boolean("hi") → true
+typeof 42 → "number"
 ```
 
 [View Interview Questions](./interview.md)
