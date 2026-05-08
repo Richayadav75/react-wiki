@@ -91,13 +91,14 @@ global sees b → ReferenceError (can't look inside outer)
 
 ![Scope Chain feat](scope-chain-feat.png)
 
-
 ***Key Rule**
 `Key rule:` Scope chain goes INWARD → OUTWARD only. A child can see its parent. A parent CANNOT see inside a child. Siblings cannot see each other.
 
 
 ### What is Hoisting?
-`Hoisting` = Before running any code, JS does a first pass and registers all declarations. This is called hoisting. Function declarations are fully hoisted. var is hoisted but undefined. let/const are hoisted but locked (Temporal Dead Zone).
+`Hoisting` = JavaScript runs in two phases before executing your code. In the compilation phase, the engine scans for all declarations and allocates memory for them. In the execution phase, code runs line by line. Because declarations are processed before execution, they appear to be "hoisted" (lifted) to the top of their scope — even though your code hasn't changed.
+
+![Hoisting (small)](hoistingInsights.png) 
 
 > `Real-world analogy`
 > Imagine a teacher scans the attendance sheet before class starts. They know every student exists (hoisted) — but students haven't answered questions yet. var students get marked "present but silent" (undefined). let/const students are marked "do not call yet — TDZ". function declarations are fully ready from the start. You can call a function before defining it.
@@ -223,6 +224,237 @@ let loop fix → would print 0,1,2 (fresh binding each iteration)
 2. Accessing variables in wrong scopes
 3. Thinking var makes code "flexible" (it actually creates bugs)
 4. Not understanding that functions are hoisted but expressions are not
+
+
+**Var Hositing**
+`var declarations` are hoisted to the top of their function scope (or global scope) and initialized as `undefined`. The assignment happens only when execution reaches that line. This means you can access a var before its declaration — but you'll get `undefined`, not the assigned value.
+
+***Example:***
+```javascript
+`What you write`
+console.log(name);   // what does this print?
+var name = "Richa";
+console.log(name);   // what about this?
+```
+***Example:***
+```javascript
+`What JavaScript sees internally`
+var name;            // hoisted declaration (undefined)
+console.log(name);   // undefined
+name = "Richa";      // assignment stays here
+console.log(name);   // "Richa"
+```
+***Output:***
+```
+undefined
+"Richa"
+```
+**Quick Check**
+Line 1: var name is hoisted as undefined. Accessing it gives undefined — not an error.
+Line 2: Assignment name = "Richa" runs. Now the variable has its value.
+Line 3: Prints "Richa" correctly.
+
+***Example:***
+```javascript
+`var inside a function (function scope)`
+var x = "global";
+
+function test() {
+  console.log(x);    // undefined — NOT "global"
+  var x = "local";
+  console.log(x);    // "local"
+}
+
+test();
+console.log(x);      // "global" — untouched
+```
+***Output:***
+```
+undefined
+"local"
+"global"
+```
+**Explanation:**
+
+**Line 3**: `console.log(x)` runs before `var x = "local"`. Because of hoisting, the engine sees `var x` at the top of the function. So `x` exists but its value is `undefined`.
+**Line 5**: `x = "local"` assigns the value. Now `x` is "local".
+**Line 6**: Prints "local".
+**Line 8**: Prints "global". The `var` inside `test()` only exists within that function. It does NOT affect the outer `x`.
+
+***Quick Check***
+Inside test(): var x is function-scoped to test(). It is hoisted to the top of test() as undefined — it shadows the global x. The global x is never touched inside the function.
+Important: var does NOT have block scope — it ignores if/for/while blocks and leaks out to the enclosing function.
+
+**example:**
+```javascript
+`var in a loop (classic bug):`
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+// Expected: 0, 1, 2
+// Actual:   3, 3, 3  ← classic hoisting bug!
+```
+**Output:**
+```
+3
+3
+3
+```
+**Explanation:**
+Why? var i is function-scoped (or global) — all three closures share the same i. By the time setTimeout fires, the loop has finished and i = 3.
+Fix: Use let instead — let is block-scoped, so each iteration gets its own i. Output becomes 0, 1, 2.
+
+### Function hoisting
+**Theory**
+`Function declarations are fully hoisted` — both the name AND the function body are available before the function definition line. This is why you can call a function before writing it. However, function expressions and arrow functions are NOT fully hoisted — they follow the rules of the variable they are assigned to (var/let/const).
+
+**Example:**
+```javascript
+`Function declaration — fully hoisted`
+greet("Richa");        // works! called BEFORE definition
+
+function greet(name) {
+  console.log("Hello, " + name + "!");
+}
+```
+**Output:**
+```
+Hello, Richa!
+```
+**Quick Check**
+`Why it works:` During compilation, JavaScript reads the entire function greet and stores it in memory. By the time execution starts, greet is already fully available — name and body both hoisted.
+
+**Example:**
+```javascript
+`Function expression — NOT fully hoisted`
+`With var`
+sayHi();   // TypeError!
+
+var sayHi = function() {
+  console.log("Hi!");
+};
+```
+**Output:**
+```
+TypeError: sayHi is not a function
+```
+**Quick Check**
+`Why?` var sayHi is hoisted as undefined. Calling undefined() throws TypeError.
+
+**Example:**
+```javascript
+`With let/const`
+sayBye();  // ReferenceError!
+
+const sayBye = function() {
+  console.log("Bye!");
+};
+```
+**Output:**
+```
+ReferenceError: Cannot access 'sayBye' before initialization
+```
+**Quick Check**
+`Why?` const sayBye is in TDZ. Accessing before declaration throws ReferenceError.
+
+**Example:**
+```javascript
+`Arrow function — same as function expression`
+add(2, 3);    // ReferenceError — in TDZ
+
+const add = (a, b) => a + b;
+
+```
+**Output:**
+```
+ReferenceError: Cannot access 'add' before initialization
+```
+**Quick Check:**
+Arrow functions are always assigned to a variable — they follow that variable's hoisting rules. const/let arrow functions are in TDZ. var arrow functions are hoisted as undefined (TypeError when called).
+
+**Example:**
+```javascript
+`Function declaration vs expression — same name conflict`
+var double = function(n) { return n * 2; };  // expression
+
+function double(n) { return n * 10; }        // declaration
+
+console.log(double(5));   // what prints?
+```
+**Output:**
+```
+10
+```
+**Quick Check**
+`Hoisting order:` Function declarations are hoisted first. Then var declarations (as undefined) are hoisted but do NOT override the function since var double doesn't get its value until execution. At runtime, var double = function(n){return n*2} runs and overwrites the hoisted function declaration.
+Result: double is the expression version → 5 * 2 = 10.
+
+
+**let, const, and class hoisting**
+**Theory:** `let, const, and class` ARE hoisted — the JS engine knows they exist from the start of their block. But unlike var, they are not initialized until their declaration line is reached. The gap between entering the scope and the declaration is called the `Temporal Dead Zone (TDZ)`. Accessing a variable in TDZ throws a `ReferenceError`.
+
+**Quick Check:**
+A common misconception: "let and const are NOT hoisted." They ARE hoisted — just not initialized. The TDZ is proof of hoisting: if let wasn't hoisted, the outer variable would be accessible inside the block.
+
+**Example:**
+```javascript
+`Proof that let IS hoisted (TDZ proof`
+let x = "outer";
+
+{
+  console.log(x);  // ReferenceError — NOT "outer"!
+  let x = "inner"; // x is hoisted to top of block
+}                  // but TDZ until this line
+```
+**Output:**
+```
+ReferenceError: Cannot access 'x' before initialization
+```
+**Quick check**
+If let was NOT hoisted: JavaScript would look up the scope chain and find x = "outer". It would print "outer".
+Since let IS hoisted: The inner x is known to the block from its start. It shadows the outer x but is in TDZ until its declaration line — so accessing it throws ReferenceError. This proves hoisting occurred.
+
+**Example:**
+```javascript
+`const must be initialized at declaration`
+// Valid
+const PI = 3.14159;
+
+// Invalid — SyntaxError
+const MAX;  // missing initializer
+MAX = 100;
+
+```
+**Output:**
+```
+SyntaxError: Missing initializer in const declaration
+```
+**Quick check**
+`const` rule: Must be initialized when declared. Cannot be reassigned (the binding is constant). The value itself can be mutated if it is an object or array.
+
+**Example:**
+```javascript
+`Class hoisting — also in TDZ`
+
+// Function declaration — works before definition
+const obj1 = new Animal("cat");  // Error!
+
+class Animal {
+  constructor(type) { this.type = type; }
+}
+
+// Must use class AFTER definition
+const obj2 = new Animal("dog");  // Works
+console.log(obj2.type);          // "dog"
+
+```
+**Output:**
+```
+ReferenceError: Cannot access 'Animal' before initialization
+dog
+```
+**Quick check**
+`Unlike function declarations`, class declarations are in TDZ — you cannot instantiate a class before its definition. This is intentional: class bodies run in strict mode, and hoisting them fully (like functions) could lead to confusing prototype setups.
 
 ---
 
