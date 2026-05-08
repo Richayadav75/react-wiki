@@ -58,6 +58,11 @@ ReferenceError: Cannot access 'b' before initialization
 **Quick Check:**
 `Default parameters have their own TDZ`. Each parameter is initialized left to right. When evaluating a's default (= b), b hasn't been initialized yet — it's in TDZ. This throws ReferenceError.
 
+**Working Flow**
+
+![TDZ](tdz-working-flow.png)
+
+
 ---
 
 [View Interview Questions](./interview.md)
