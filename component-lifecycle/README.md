@@ -16,10 +16,8 @@ A restaurant: mounting is opening day (set up tables, turn on lights). Updating 
 **Theory**
 Each phase maps to specific class lifecycle methods and their hook equivalents. The underlying concept is the same regardless of whether you use classes or functions.
 
-**Working Flow**
-![flow-chart](flow-chart.png)
 
-**Lifecycle Diagram**
+**Working Flow**
 ```
 Component created
        |

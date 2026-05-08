@@ -8,7 +8,6 @@ React is a UI library — it doesn't know how to fetch data on its own. You wire
 **Analogy**
 A restaurant waiter. You (component) sit down and place an order (useEffect runs). The waiter (fetch) goes to the kitchen (API server). While waiting you see a "Loading..." message. The waiter returns with food (data) or says "Sorry, we're out" (error). The table is then updated (setState → re-render).
 
----
 
 ### 1. The Loading / Error / Data State Pattern
 **Theory**: Every API call has three possible states — loading, error, and success. You track all three with `useState`. Never skip the loading or error state — your users will thank you.
@@ -67,13 +66,10 @@ function PostsList() {
 
 **Explanation**: `useEffect` with `[]` runs exactly once after the first render. The three-state pattern (loading / error / data) is the industry standard — always initialize `loading` to `true` so the spinner shows immediately.
 
----
 
 ### 2. Async/Await with Cleanup (AbortController)
 **Theory**: Using `async/await` inside `useEffect` is cleaner. But there is a subtle bug — if the component unmounts while the request is in flight, React will try to call `setState` on an unmounted component. The fix is `AbortController`, which lets you cancel the fetch.
 
-**Working Flow**
-![flow-chart-2](flow-chart-2.png)
 
 **Example**
 ```jsx
@@ -117,8 +113,6 @@ HTTP 404     → "Error: HTTP 404"
 ### 3. Race Conditions and the Fix
 **Theory**: A race condition happens when a user changes a filter quickly (e.g., tabs from "Sports" to "Tech"). Two fetches are now in flight. If the "Sports" response arrives after "Tech", your UI shows stale data. AbortController is the fix.
 
-**Working Flow**
-![flow-chart-3](flow-chart-3.png)
 
 **Example**
 ```jsx
@@ -160,8 +154,6 @@ category="Tech"   → [A] aborted, fetch starts [B]
 ### 4. Axios vs Fetch
 **Theory**: `fetch` is built-in to the browser. `axios` is a third-party library (~15kB) that adds conveniences: automatic JSON parsing, request/response interceptors, and it throws on 4xx/5xx status codes (unlike fetch which only throws on network failure).
 
-**Working Flow**
-![flow-chart-4](flow-chart-4.png)
 
 **Example**
 ```jsx
@@ -191,21 +183,9 @@ fetch 200    → need await res.json()
 axios 200    → data is already the JS object
 ```
 
-| Feature | fetch | axios |
-| :--- | :--- | :--- |
-| Built-in | Yes | No (npm install) |
-| Auto JSON parse | No | Yes |
-| Throws on 4xx/5xx | No | Yes |
-| Interceptors | No | Yes |
-| Request cancellation | AbortController | CancelToken / AbortController |
-
----
-
 ### 5. Custom `useFetch` Hook
 **Theory**: If you find yourself copy-pasting the same loading/error/data pattern across components, extract it into a custom hook. A custom hook is just a JavaScript function whose name starts with `use` and that can call other hooks.
 
-**Working Flow**
-![flow-chart-5](flow-chart-5.png)
 
 **Example**
 ```jsx
@@ -267,8 +247,6 @@ error         → "Error: HTTP 404"
 ### 6. React Query (TanStack Query) — The Modern Solution
 **Theory**: React Query is a server-state library. It handles caching, background refetching, stale-while-revalidate, pagination, and optimistic updates — all the hard stuff. `useQuery` replaces the entire loading/error/data pattern. `useMutation` handles POST/PUT/DELETE with automatic cache invalidation.
 
-**Working Flow**
-![flow-chart-6](flow-chart-6.png)
 
 **Example**
 ```jsx
@@ -327,7 +305,6 @@ Add Post btn  → "Saving..." → post created → ["posts"] cache invalidated �
 
 **Explanation**: The `queryKey` array is the cache key. Whenever you call `invalidateQueries` with the same key, React Query marks the cache as stale and re-fetches in the background. This keeps your UI always fresh without manual state management.
 
----
 
 ### Real-World Example: Posts Feed with Loading Spinner and Error
 ```jsx

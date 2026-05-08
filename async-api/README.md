@@ -8,8 +8,6 @@ The Fetch API is the modern, promise-based way to make HTTP requests in the brow
 **Analogy**
 Sending a courier package. You fill out a form (Request with headers and body). The courier service (browser) dispatches it. Later you receive a delivery receipt (Response). The receipt has metadata (headers: content-type, status code). You open the box to get the actual contents (response.json() / response.blob()). If you call the courier to cancel before delivery (AbortController), the package is recalled.
 
----
-
 ### 1. The Fetch API — Request, Response, Headers
 **Theory**: `fetch()` accepts either a URL string or a `Request` object. It returns a Promise that resolves to a `Response` object. The Response body can be extracted in several formats depending on what the server sends.
 
