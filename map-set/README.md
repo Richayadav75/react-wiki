@@ -1,51 +1,70 @@
 - Category: JavaScript
+- Track: JavaScript
 - Difficulty: Intermediate
-- Related: object-methods
+- Related: object-methods, array-methods
 
 ### What are Map and Set?
-Introduced in ES6, `Map` and `Set` are advanced data structures that solve common limitations found in traditional Arrays and Objects.
+Introduced in ES6, **Map** and **Set** are specialized collections that provide better performance and more flexibility than traditional Objects and Arrays for specific tasks like unique value storage or complex key mapping.
 
 ---
 
-### 1. Map (Key-Value Pairs)
-**Theory**: Like Objects, Maps hold key-value pairs. But unlike Objects, Map keys can be *any* data type (even other objects or functions), and they remember the exact order of insertion.
+### 1. Removing Duplicates Flow
+**Working Flow: The "Set" Shortcut**
 
-**Key Features**:
-- **set(k, v)**: Adds a pair.
-- **get(k)**: Retrieves a value.
-- **size**: Returns the number of elements.
-
-**Step-by-Step Example**:
-```javascript
-// Step 1: Create a Map
-let userRoles = new Map();
-
-// Step 2: Add data (Keys can be anything!)
-userRoles.set("Richa", "Admin");
-userRoles.set(123, "Guest"); 
-
-// Step 3: Read data
-console.log(userRoles.get("Richa")); // "Admin"
-console.log(userRoles.size);         // 2
+```mermaid
+graph LR
+    A[Array with Duplicates] --> B[new Set]
+    B --> C[Spread into new Array]
+    C --> D[Unique Array]
 ```
 
 ---
 
-### 2. Set (Unique Values)
-**Theory**: A Set is a collection of values where each value must be **unique**. If you try to add a duplicate, it is simply ignored.
+### 2. Map (Advanced Key-Value)
 
-**Step-by-Step Example**:
+#### Map vs Object
+| Feature | Object | Map |
+| :--- | :--- | :--- |
+| **Key Types** | String / Symbol only | **Any type** (Obj, Fn, etc.) |
+| **Order** | Mostly ordered | **Guaranteed** insertion order |
+| **Size** | Manual (`Object.keys().length`) | **.size** property |
+| **Performance** | Good | **Better** for frequent add/remove |
+
+#### Iterating over Map
 ```javascript
-// Step 1: Create a Set from an array with duplicates
-const numbers = new Set([1, 2, 2, 3, 3, 3]);
+const userMap = new Map([["id", 1], ["name", "Richa"]]);
 
-// Step 2: The duplicates are automatically removed!
-console.log(numbers); // Set { 1, 2, 3 }
-
-// Step 3: Add new values
-numbers.add(4);
-numbers.add(1); // Ignored, 1 already exists
+for (const [key, value] of userMap) {
+  console.log(`${key}: ${value}`);
+}
 ```
+
+---
+
+### 3. Set (Unique Collections)
+
+#### Common Use Case: Array Deduplication
+**Theory**: The easiest way to remove duplicates from an array is to convert it to a Set and then back to an Array.
+```javascript
+const dups = [1, 1, 2, 3, 3, 4];
+const unique = [...new Set(dups)];
+console.log(unique); // [1, 2, 3, 4]
+```
+
+#### Set Methods
+| Method | Description |
+| :--- | :--- |
+| `add(val)` | Adds a unique value |
+| `has(val)` | Returns true if exists |
+| `delete(val)` | Removes a value |
+| `clear()` | Removes all values |
+
+---
+
+### 4. WeakMap & WeakSet (Briefly)
+**Theory**: "Weak" versions of these collections do not prevent garbage collection. If an object used as a key in a `WeakMap` is deleted elsewhere, it is automatically removed from the `WeakMap` too. 
+- **Keys must be objects**.
+- **Not iterable** (size is not accessible).
 
 ---
 

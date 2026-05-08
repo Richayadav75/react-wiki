@@ -1,105 +1,78 @@
-- Category: Patterns
+- Category: React Patterns
+- Track: React
 - Difficulty: Intermediate
 - Related: useState, useEffect, useRef
 
-A **custom hook** is a JavaScript function whose name starts with `use` and that calls other React hooks. It lets you **extract and reuse stateful logic** between components without changing the component tree (no HOCs, no render props).
+### Custom Hooks
+A **Custom Hook** is a JavaScript function whose name starts with `use` and that can call other Hooks. It allows you to extract component logic into reusable functions, making your components cleaner and your code easier to maintain.
 
-## Rules
+---
 
-1. Name starts with `use` (e.g. `useLocalStorage`, `useDebounce`)
-2. Can call any other hook inside
-3. Stateful logic is isolated — each component calling the hook gets its own state
+### 1. Extraction Flow
+**Working Flow: Moving Logic out of Components**
 
-## Example — useDebounce
+```mermaid
+graph LR
+    A[Component A] -->|Extract| B[useMyHook]
+    C[Component B] -->|Import| B
+    B -->|Calls| D[useState / useEffect]
+```
 
+---
+
+### 2. Core Principles
+
+#### Independence of State
+**Theory**: Every time you use a custom hook, all state and effects inside of it are **completely isolated**. Two components using the same custom hook do NOT share state.
 ```tsx
-import { useState, useEffect } from 'react';
+const [val1, setVal1] = useToggle(); // Instance A
+const [val2, setVal2] = useToggle(); // Instance B (Independent)
+```
 
-function useDebounce<T>(value: T, delay = 300): T {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+#### Rules of Custom Hooks
+1. **Name must start with `use`**: This tells React's linter that the function follows Hook rules.
+2. **Follow the Rules of Hooks**: Don't call them inside loops, conditions, or nested functions.
+3. **Pure Logic**: Custom hooks should focus on *logic*, not UI (they return data, not JSX).
 
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
+---
 
-  return debouncedValue;
-}
+### 3. Comprehensive Examples
 
-// Usage
-function SearchBar() {
-  const [query, setQuery] = useState('');
-  const debouncedQuery = useDebounce(query, 500);
-
-  useEffect(() => {
-    if (debouncedQuery) fetchResults(debouncedQuery);
-  }, [debouncedQuery]);
-
-  return <input value={query} onChange={e => setQuery(e.target.value)} />;
+#### useToggle (The Simplest Case)
+```tsx
+function useToggle(initialValue = false) {
+  const [value, setValue] = useState(initialValue);
+  const toggle = () => setValue(v => !v);
+  return [value, toggle];
 }
 ```
 
-## Example — useLocalStorage
-
+#### useWindowSize (Handling Events)
+**Theory**: Perfect for wrapping browser events like `resize` or `scroll`.
 ```tsx
-import { useState } from 'react';
-
-function useLocalStorage<T>(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch {
-      return initialValue;
-    }
-  });
-
-  const setValue = (value: T | ((prev: T) => T)) => {
-    const valueToStore = value instanceof Function ? value(storedValue) : value;
-    setStoredValue(valueToStore);
-    window.localStorage.setItem(key, JSON.stringify(valueToStore));
-  };
-
-  return [storedValue, setValue] as const;
-}
-```
-
-## Example — useFetch
-
-```tsx
-import { useState, useEffect } from 'react';
-
-function useFetch<T>(url: string) {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+function useWindowSize() {
+  const [size, setSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
+    const handleResize = () => setSize({ width: window.innerWidth, height: window.innerHeight });
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    fetch(url)
-      .then(res => res.json())
-      .then(d => { if (!cancelled) { setData(d); setLoading(false); } })
-      .catch(e => { if (!cancelled) { setError(e.message); setLoading(false); } });
-
-    return () => { cancelled = true; };
-  }, [url]);
-
-  return { data, loading, error };
+  return size;
 }
 ```
 
-## Common Pitfalls
+---
 
-- **Not starting the name with `use`** — React's linter won't enforce hook rules for it.
-- **Calling hooks conditionally inside the custom hook** — The same rules of hooks apply inside.
-- **Returning too much** — Keep the API surface minimal and focused on one concern.
+### 4. Summary: Why use Custom Hooks?
 
-## Learn More
-
-- [React Docs — Custom Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks)
-- [useHooks.com](https://usehooks.com/) — collection of production-ready custom hooks
+| Benefit | Description |
+| :--- | :--- |
+| **Reusability** | Use the same logic across different components. |
+| **Readability** | Keeps components focused on rendering, not logic. |
+| **Testability** | You can test the logic independently from the UI. |
+| **Abstraction** | Hide complex implementation details (like localStorage sync). |
 
 ---
 

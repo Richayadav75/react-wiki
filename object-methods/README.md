@@ -1,61 +1,79 @@
 - Category: JavaScript
+- Track: JavaScript
 - Difficulty: Beginner
-- Related: data-types
+- Related: data-types, es6-features, prototypes
 
 ### What are Object Methods?
-Objects are key-value pairs. JavaScript provides built-in `Object` methods to extract keys, values, or merge objects together.
+Objects are the foundation of JavaScript. While objects store data in **key-value pairs**, the global `Object` constructor provides powerful static methods to manipulate, protect, and inspect these structures.
 
 ---
 
-### 1. Extracting Keys and Values
-**Theory**: You can break an object down into arrays of just its keys, just its values, or both (entries).
-
+### 1. Object Manipulation Flow
 **Working Flow**
-```text
-{ a: 1, b: 2 } --> Object.keys() --> ["a", "b"]
-{ a: 1, b: 2 } --> Object.values() --> [1, 2]
-```
 
-**Key Methods**:
-- `Object.keys(obj)`: Returns an array of property names.
-- `Object.values(obj)`: Returns an array of property values.
-- `Object.entries(obj)`: Returns an array of [key, value] pairs.
-
-**Step-by-Step Example**:
-```javascript
-const user = { name: "Richa", role: "Admin", age: 25 };
-
-// Step 1: Get all the keys
-const keys = Object.keys(user); 
-console.log(keys); // ["name", "role", "age"]
-
-// Step 2: Get all the values
-const values = Object.values(user);
-console.log(values); // ["Richa", "Admin", 25]
-
-// Step 3: Loop through keys and values together
-Object.entries(user).forEach(([key, value]) => {
-  console.log(`${key} is ${value}`);
-});
+```mermaid
+graph TD
+    A[Raw Object] --> B{What is the goal?}
+    B -- "Extract Data" --> C[keys / values / entries]
+    B -- "Protect Data" --> D[freeze / seal]
+    B -- "Convert Array back" --> E[fromEntries]
+    B -- "Create/Clone" --> F[assign / create]
 ```
 
 ---
 
-### 2. Merging and Cloning Objects
-**Theory**: You often need to combine objects or create a copy of an object without mutating the original.
+### 2. Core Method Categories
 
-**Key Method**:
-- `Object.assign(target, ...sources)`: Copies properties from source objects to a target object. (Note: Spread syntax `{...obj}` is now more common).
+#### Data Extraction
+| Method | Description | Output for `{a:1}` |
+| :--- | :--- | :--- |
+| `keys(obj)` | Returns array of keys | `["a"]` |
+| `values(obj)` | Returns array of values | `[1]` |
+| `entries(obj)` | Returns array of `[key, value]` | `[["a", 1]]` |
 
-**Step-by-Step Example**:
+#### Protection & Integrity
+| Method | Can Add? | Can Delete? | Can Update? |
+| :--- | :--- | :--- | :--- |
+| **Normal** | ✅ | ✅ | ✅ |
+| `seal(obj)` | ❌ | ❌ | ✅ |
+| `freeze(obj)` | ❌ | ❌ | ❌ |
+
+---
+
+### 3. Advanced Examples
+
+#### Object.fromEntries()
+**Theory**: The inverse of `entries()`. It transforms a list of key-value pairs into an object. Useful for cleaning data.
 ```javascript
-const target = { a: 1, b: 2 };
-const source = { b: 4, c: 5 };
+const entries = [["name", "Richa"], ["role", "Dev"]];
+const user = Object.fromEntries(entries);
+console.log(user); // { name: "Richa", role: "Dev" }
+```
+**Output**: `{ name: "Richa", role: "Dev" }`
 
-// Step 1: Merge source into target (overwrites existing keys)
-const returnedTarget = Object.assign(target, source);
+#### Freezing vs Sealing
+```javascript
+const settings = { theme: "dark" };
 
-console.log(target); // { a: 1, b: 4, c: 5 }
+Object.freeze(settings);
+settings.theme = "light"; // Silently fails (or throws in strict mode)
+console.log(settings.theme); // "dark"
+```
+**Output**: `dark`
+
+---
+
+### 4. Cloning vs Merging
+**Theory**: While `Object.assign()` was the standard, the ES6 **Spread Operator** (`...`) is now the preferred way to clone or merge objects.
+```javascript
+const base = { id: 1 };
+const details = { name: "Richa" };
+
+// Merging
+const combined = { ...base, ...details }; 
+
+// Cloning
+const clone = { ...base };
 ```
 
 ---

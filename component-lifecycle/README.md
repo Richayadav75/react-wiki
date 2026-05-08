@@ -1,86 +1,83 @@
-- name: Component Lifecycle
-- category: React Fundamentals
-- track: React
-- difficulty: Beginner
-- related: useEffect, useState
+- Category: React Fundamentals
+- Track: React
+- Difficulty: Intermediate
+- Related: useEffect, useState, useLayoutEffect
 
-React function components don't have explicit lifecycle methods like class components, but they go through the same phases: **Mount → Update → Unmount**. Understanding how these map to hooks is key to avoiding bugs.
+### Component Lifecycle
+In React, components have a lifecycle that consists of three main phases: **Mounting**, **Updating**, and **Unmounting**. While functional components use Hooks to manage these phases, the underlying concept of "the life of a component" remains the same.
 
-## The three phases
+---
 
-### Mount (component appears in the DOM)
+### 1. The Lifecycle Cycle
+**Working Flow: From Birth to Death**
 
+```mermaid
+graph TD
+    A[Mounting: Birth] -->|Render| B[Update: Growth]
+    B -->|State/Prop Change| B
+    B -->|Remove from DOM| C[Unmounting: Death]
+    
+    subgraph Phases
+        D[componentDidMount / useEffect empty deps]
+        E[componentDidUpdate / useEffect with deps]
+        F[componentWillUnmount / cleanup function]
+    end
+```
+
+---
+
+### 2. The Three Phases Breakdown
+
+#### Mounting
+**Theory**: When a component is being created and inserted into the DOM.
+- **Hook**: `useEffect(() => { ... }, [])`
+- **Purpose**: Fetching initial data, setting up subscriptions, or starting timers.
+
+#### Updating
+**Theory**: When a component's props or state change, causing a re-render.
+- **Hook**: `useEffect(() => { ... }, [dependencies])`
+- **Purpose**: Responding to data changes (e.g., re-fetching data when an ID changes).
+
+#### Unmounting
+**Theory**: When a component is being removed from the DOM.
+- **Hook**: The **return function** inside `useEffect`.
+- **Purpose**: Cleaning up timers, canceling network requests, or removing event listeners.
+
+---
+
+### 3. Comprehensive Examples
+
+#### The Cleanup Pattern
+**Theory**: The cleanup function doesn't just run on unmount; it runs **before the next effect** to clean up the previous render's side effects.
 ```tsx
 useEffect(() => {
-  // Runs once after first render (componentDidMount equivalent)
-  console.log('mounted');
+  const timer = setInterval(() => {
+    console.log("Tick");
+  }, 1000);
+
+  // Cleanup: Prevents memory leaks
+  return () => clearInterval(timer);
 }, []);
 ```
 
-### Update (props or state changes)
-
-```tsx
-useEffect(() => {
-  // Runs after every render where `value` changed (componentDidUpdate equivalent)
-  console.log('value changed to', value);
-}, [value]);
-```
-
-### Unmount (component removed from the DOM)
-
-```tsx
-useEffect(() => {
-  const subscription = subscribe();
-  return () => {
-    // Cleanup — runs before unmount (componentWillUnmount equivalent)
-    subscription.unsubscribe();
-  };
-}, []);
-```
-
-## Lifecycle timeline
-
-```
-Mount:   render → paint → useEffect ([] deps)
-Update:  render → paint → useEffect cleanup → useEffect run
-Unmount: useEffect cleanup → DOM removed
-```
-
-## Class ↔ Hook equivalents
-
-| Class Lifecycle | Hook Equivalent |
-|----------------|-----------------|
-| `componentDidMount` | `useEffect(() => {}, [])` |
-| `componentDidUpdate` | `useEffect(() => {}, [dep])` |
-| `componentWillUnmount` | `useEffect(() => { return cleanup }, [])` |
-| `shouldComponentUpdate` | `React.memo` / `useMemo` / `useCallback` |
-| `getDerivedStateFromProps` | Compute during render (no hook needed) |
-
-## useLayoutEffect
-
-`useLayoutEffect` fires **synchronously after DOM mutations but before the browser paints** — useful for measuring DOM nodes or synchronizing animations.
-
+#### Synchronous Layout (useLayoutEffect)
+**Theory**: Use this only if you need to measure the DOM before the user sees the paint.
 ```tsx
 useLayoutEffect(() => {
-  // Runs before paint — safe to read layout
-  const rect = ref.current.getBoundingClientRect();
-  setHeight(rect.height);
+  const height = myRef.current.offsetHeight;
+  console.log("Height before paint:", height);
 }, []);
 ```
 
-> Prefer `useEffect` by default; use `useLayoutEffect` only when you need synchronous DOM measurement.
+---
 
-## Common Pitfalls
+### 4. Summary Table: Hooks vs Class Methods
 
-- **Relying on component order** — React may unmount and remount components (Strict Mode does this intentionally in dev).
-- **Skipping cleanup** — Always clean up subscriptions, timers, and listeners in the return function.
-- **Running effects before mount** — A ref assigned in JSX (`ref={myRef}`) is only populated *after* render, not before.
-
-## Learn More
-
-- [React Docs — useEffect](https://react.dev/reference/react/useEffect)
-- [React Docs — useLayoutEffect](https://react.dev/reference/react/useLayoutEffect)
-- [React Lifecycle Diagram](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+| Phase | Class Method | Functional Hook |
+| :--- | :--- | :--- |
+| **Mount** | `componentDidMount` | `useEffect(fn, [])` |
+| **Update** | `componentDidUpdate` | `useEffect(fn, [deps])` |
+| **Unmount** | `componentWillUnmount` | `useEffect(() => cleanup, [])` |
 
 ---
 

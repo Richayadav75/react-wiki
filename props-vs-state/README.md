@@ -1,93 +1,76 @@
 - Category: React Fundamentals
+- Track: React
 - Difficulty: Beginner
-- Related: useState, useContext
+- Related: useState, useContext, props-drilling
 
-**Props** and **state** are both inputs that affect what a component renders, but they serve fundamentally different roles. Confusing the two is one of the most common beginner mistakes.
+### Props vs State
+**Props** and **state** are the two main types of data that control a React component. While they both trigger a re-render when changed, they serve different purposes: Props are like **arguments** passed to a function, while State is like **local variables** inside a function.
 
-## Props — data flows down
+---
 
-Props are **read-only** values passed from a parent component. A component cannot change its own props.
+### 1. Unidirectional Data Flow
+**Working Flow: One-Way Traffic**
 
-```tsx
-// Parent passes data down
-function App() {
-  return <Greeting name="Alice" age={28} />;
-}
-
-// Child reads, never writes
-function Greeting({ name, age }: { name: string; age: number }) {
-  return <p>Hello, {name}! You are {age} years old.</p>;
-}
+```mermaid
+graph TD
+    A[Parent Component] -->|Passes Props| B[Child Component]
+    B -->|Triggers Callback| A
+    A -->|Updates State| A
+    A -.->|Re-renders Child| B
 ```
 
-Props can be anything: strings, numbers, booleans, objects, arrays, functions, and even JSX (via `children`).
+---
 
-## State — local reactive memory
+### 2. Side-by-Side Comparison
 
-State is **private** to the component that owns it. Changing state schedules a re-render.
+| Feature | Props | State |
+| :--- | :--- | :--- |
+| **Source** | Received from Parent | Managed within Component |
+| **Mutability** | **Immutable** (Read-Only) | **Mutable** (via setter) |
+| **Purpose** | Configuration / Data Sharing | Interactivity / Local Memory |
+| **Access** | `props.name` or `{name}` | `const [val, setVal]` |
 
+---
+
+### 3. Comprehensive Examples
+
+#### Passing Props (Parent to Child)
+**Theory**: Props are passed as attributes on the JSX tag. They allow components to be reusable.
 ```tsx
-function Toggle() {
-  const [isOn, setIsOn] = useState(false);
-
-  return (
-    <button onClick={() => setIsOn(prev => !prev)}>
-      {isOn ? 'ON' : 'OFF'}
-    </button>
-  );
+function Button({ label, color }) {
+  return <button style={{ backgroundColor: color }}>{label}</button>;
 }
+
+// Usage
+<Button label="Save" color="green" />
+<Button label="Delete" color="red" />
 ```
 
-## Side-by-side comparison
-
-| | Props | State |
-|---|---|---|
-| Who controls it? | Parent component | The component itself |
-| Mutable by the component? | ❌ No | ✅ Yes |
-| Causes re-render when changes? | ✅ Yes (parent re-renders) | ✅ Yes |
-| Accessible to children? | Via passing down | Via passing as prop |
-| Initial source | Parent | `useState` initializer |
-
-## Lifting state up
-
-When two sibling components need to share state, **lift it** to their closest common parent:
-
+#### Managing State (Internal Memory)
+**Theory**: State allows a component to remember things (like text in an input or whether a modal is open).
 ```tsx
-function Parent() {
+function Counter() {
   const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <Display count={count} />          {/* prop */}
-      <Counter onIncrement={() => setCount(c => c + 1)} /> {/* callback prop */}
-    </>
-  );
+  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
 }
 ```
 
-## Derived values — don't store what you can compute
+---
 
-If a value can be derived from props or state, **compute it during render** instead of storing it in state:
+### 4. Advanced Concepts
 
-```tsx
-// ❌ Redundant state
-const [fullName, setFullName] = useState(`${firstName} ${lastName}`);
+#### Lifting State Up
+**Theory**: If two components need to share the same data, move the state to their common parent and pass it down as props.
 
-// ✅ Derived value
-const fullName = `${firstName} ${lastName}`;
-```
+#### Prop Drilling
+**Theory**: Passing props through multiple layers of components just to reach a deep child. This is a common "pain point" solved by **Context API** or **Redux**.
 
-## Common Pitfalls
+---
 
-- **Trying to modify props** — This causes TypeScript errors and breaks React's data flow.
-- **Copying props into state** — Creates a stale copy that diverges from the source of truth.
-- **Over-lifting state** — Lift state only as high as needed; over-lifting causes unnecessary re-renders.
+### 5. Summary Table: Which one to use?
 
-## Learn More
-
-- [React Docs — Passing Props to a Component](https://react.dev/learn/passing-props-to-a-component)
-- [React Docs — State: A Component's Memory](https://react.dev/learn/state-a-components-memory)
-- [Thinking in React](https://react.dev/learn/thinking-in-react)
+- **Use Props** if the data comes from outside and the component just needs to display it.
+- **Use State** if the data changes over time due to user interaction or API calls within the component.
 
 ---
 

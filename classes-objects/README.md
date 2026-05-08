@@ -1,45 +1,91 @@
 - Category: JavaScript
+- Track: JavaScript
 - Difficulty: Intermediate
-- Related: prototypes
+- Related: prototypes, this-keyword
 
 ### What are Classes & Objects?
-Object-Oriented Programming (OOP) in JavaScript allows you to structure your code using "Classes" as blueprints to create individual "Objects".
+In JavaScript, **Classes** are templates (blueprints) for creating objects. They encapsulate data with code to manipulate that data. While JavaScript uses a prototype-based system, the `class` syntax (introduced in ES6) provides a much cleaner way to write Object-Oriented code.
 
 ---
 
-### 1. The Class Blueprint
-**Theory**: A class defines the properties (data) and methods (behavior) that its objects will have.
+### 1. Inheritance Flow
+**Working Flow: Parent to Child**
 
-**Working Flow**
-```text
-[ Blueprint (Class) ] ---> ( new ) ---> [ Instance (Object) ]
-      (Car)                               (My Honda)
+```mermaid
+graph TD
+    A[Parent Class: Animal] -->|extends| B[Child Class: Dog]
+    B -->|new| C[Instance: Buddy]
+    A -- "Methods" --> C
+    B -- "Specific Methods" --> C
 ```
 
-**Key Features**:
-- **constructor**: A special method that runs automatically when a new object is created.
-- **this**: Refers to the specific object currently being created or used.
+---
 
-**Step-by-Step Example**:
+### 2. Core OOP Concepts
+
+#### The Constructor & "new"
+**Theory**: The `constructor` is a special method for creating and initializing an object instance. The `new` keyword triggers this process.
 ```javascript
-// Step 1: Define the blueprint
-class User {
-  // Step 2: The constructor sets up the initial data
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  // Step 3: Add methods (behavior)
-  greet() {
-    console.log(`Hi, I am ${this.name}`);
+class Car {
+  constructor(brand) {
+    this.brand = brand;
   }
 }
-
-// Step 4: Create actual objects using the 'new' keyword
-const user1 = new User("Richa", 25);
-user1.greet(); // "Hi, I am Richa"
+const myCar = new Car("Tesla");
 ```
+
+#### Inheritance (extends & super)
+**Theory**: A class can inherit properties and methods from another class. Use `extends` to link them and `super()` to call the parent's constructor.
+```javascript
+class Animal {
+  constructor(name) { this.name = name; }
+  eat() { console.log(`${this.name} eats.`); }
+}
+
+class Bird extends Animal {
+  fly() { console.log(`${this.name} flies!`); }
+}
+
+const parrot = new Bird("Rio");
+parrot.eat(); // Inherited
+parrot.fly(); // Own method
+```
+
+---
+
+### 3. Advanced Features
+
+#### Getters and Setters
+**Theory**: Use `get` and `set` to execute logic when a property is accessed or modified.
+```javascript
+class Person {
+  constructor(name) { this._name = name; }
+  
+  get name() { return this._name.toUpperCase(); }
+  set name(val) { this._name = val; }
+}
+```
+
+#### Private Fields (`#`)
+**Theory**: Prefix a property with `#` to make it truly private (only accessible inside the class).
+```javascript
+class BankAccount {
+  #balance = 0; // Private
+  deposit(amount) { this.#balance += amount; }
+}
+```
+
+---
+
+### 4. Summary Table
+
+| Feature | Syntax | Purpose |
+| :--- | :--- | :--- |
+| **constructor** | `constructor() {}` | Initialize data |
+| **extends** | `class A extends B` | Inherit from B |
+| **super** | `super()` | Call parent constructor |
+| **static** | `static fn() {}` | Utility fn on Class itself |
+| **private** | `#field` | Hide data from outside |
 
 ---
 

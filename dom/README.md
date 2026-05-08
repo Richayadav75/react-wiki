@@ -1,66 +1,82 @@
 - Category: DOM Manipulation
+- Track: JavaScript
 - Difficulty: Beginner
-- Related: events
+- Related: events, bom
 
 ### What is the DOM?
-The DOM (Document Object Model) is an API for HTML documents. It represents the page so that programs can change the document structure, style, and content.
+The **Document Object Model (DOM)** is a programming interface for web documents. It represents the page as a tree of objects, allowing JavaScript to dynamically access and update the content, structure, and style of the website.
 
 ---
 
-### 1. Selecting Elements
-**Theory**: Before you can change an element, you must find it in the DOM tree.
+### 1. Element Creation Flow
+**Working Flow: Creating and Mounting a New Element**
 
-**Working Flow**
-```text
-[ HTML Document ] ---> ( document.querySelector ) ---> [ HTML Element ]
-```
-
-**Key Methods**:
-- `getElementById()`: Selects a single element by its ID.
-- `querySelector()`: Selects the first element that matches a CSS selector.
-- `querySelectorAll()`: Selects ALL elements that match a CSS selector (returns a NodeList).
-
-**Step-by-Step Example**:
-```javascript
-// Step 1: Select an element by its ID
-const title = document.getElementById("main-title");
-
-// Step 2: Select the first button with the class 'btn-primary'
-const button = document.querySelector(".btn-primary");
-
-// Step 3: Select all list items inside a specific ul
-const items = document.querySelectorAll("ul#nav li");
+```mermaid
+graph TD
+    A[document.createElement] --> B[Set Content: textContent]
+    B --> C[Set Style: classList.add]
+    C --> D[Select Parent: querySelector]
+    D --> E[parent.appendChild]
+    E --> F[Element visible on page]
 ```
 
 ---
 
-### 2. Manipulating Elements
-**Theory**: Once an element is selected, you can change its text, HTML content, or CSS styles.
+### 2. Core Manipulation Categories
 
-**Working Flow**
-```text
-[ <p>Old</p> ] --( textContent = "New" )--> [ <p>New</p> ]
-```
+#### Selection (Finding)
+| Method | Description | Returns |
+| :--- | :--- | :--- |
+| `getElementById` | Find by ID | Single Element |
+| `querySelector` | Find by CSS Selector | First Match |
+| `querySelectorAll` | Find all matches | **NodeList** |
 
-**Key Properties**:
-- `textContent`: Changes the text inside an element (safe from XSS).
-- `innerHTML`: Changes the HTML inside an element.
-- `style`: Accesses the inline CSS styles.
+#### Modification (Changing)
+| Property | Description | Safety |
+| :--- | :--- | :--- |
+| `textContent` | Plain text only | ✅ Safe |
+| `innerHTML` | Parses HTML strings | ⚠️ XSS Risk |
+| `classList` | Add/Remove CSS classes | ✅ Preferred over `.style` |
 
-**Step-by-Step Example**:
+---
+
+### 3. Comprehensive Examples
+
+#### Creating Elements from Scratch
+**Theory**: Instead of writing strings of HTML, it is safer and more performant to use the built-in creation methods.
 ```javascript
-const box = document.querySelector(".box");
+// 1. Create the element
+const newDiv = document.createElement("div");
 
-// Step 1: Change the text
-box.textContent = "Hello World!";
+// 2. Customize it
+newDiv.textContent = "New Item";
+newDiv.classList.add("item", "active");
 
-// Step 2: Change the HTML structure inside it
-box.innerHTML = "<strong>Bold Text!</strong>";
-
-// Step 3: Change its CSS styling dynamically
-box.style.backgroundColor = "blue";
-box.style.fontSize = "24px";
+// 3. Place it in the DOM
+document.body.appendChild(newDiv);
 ```
+
+#### Working with Attributes
+```javascript
+const link = document.querySelector("a");
+
+// Get and Set
+link.setAttribute("href", "https://google.com");
+console.log(link.getAttribute("href"));
+
+// Classes (Modern way)
+link.classList.add("active");
+link.classList.toggle("hidden");
+```
+
+---
+
+### 4. Comparison: NodeList vs Array
+| Feature | NodeList (from querySelectorAll) | Array |
+| :--- | :--- | :--- |
+| `forEach` | ✅ Yes | ✅ Yes |
+| `map/filter` | ❌ No | ✅ Yes |
+| **Convert** | `Array.from(nodeList)` | N/A |
 
 ---
 

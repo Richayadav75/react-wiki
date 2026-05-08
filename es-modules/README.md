@@ -1,56 +1,83 @@
 - Category: JavaScript
+- Track: JavaScript
 - Difficulty: Beginner
-- Related: ES6 Features
+- Related: es6-features
 
-# ES Modules (ESM)
+### What are ES Modules (ESM)?
+ES Modules are the official standard for modularizing JavaScript code. They allow you to break your code into separate files and share functionality using `import` and `export` statements.
 
-ES Modules are the official standard format to package JavaScript code for reuse. They use `import` and `export` statements to share functionality between files.
+---
 
-## Exporting
+### 1. Module Dependency Flow
+**Working Flow: Exporting to Importing**
 
-### Named Exports
-You can have multiple named exports per file.
+```mermaid
+graph LR
+    A[utils.js] -->|export| B(Shared Function)
+    B -->|import| C[main.js]
+    C -->|execution| D[Browser/Node Output]
+```
+
+---
+
+### 2. Core Export & Import Types
+
+#### Named Exports (Multiple per file)
+**Theory**: Use named exports when you want to share multiple values from a single file. They must be imported using their exact names inside `{}`.
 ```javascript
 // math.js
 export const add = (a, b) => a + b;
-export const subtract = (a, b) => a - b;
+export const PI = 3.14;
+
+// app.js
+import { add, PI } from './math.js';
 ```
 
-### Default Export
-Each file can have only one default export.
+#### Default Exports (One per file)
+**Theory**: A file can have only one default export. It can be imported with any name and does not use `{}`.
 ```javascript
-// logger.js
-export default function log(message) {
-  console.log(message);
+// Logger.js
+export default function log(msg) { console.log(msg); }
+
+// app.js
+import myLogger from './Logger.js';
+```
+
+---
+
+### 3. Comprehensive Examples
+
+#### Renaming with 'as'
+```javascript
+import { add as sum } from './math.js';
+console.log(sum(5, 5)); // 10
+```
+
+#### Import All as a Namespace
+```javascript
+import * as MathUtils from './math.js';
+console.log(MathUtils.add(1, 2));
+console.log(MathUtils.PI);
+```
+
+#### Dynamic Imports
+**Theory**: Load modules only when needed (lazy loading) to improve performance. Returns a promise.
+```javascript
+if (userClicked) {
+  const module = await import('./heavy-chart-lib.js');
+  module.renderChart();
 }
 ```
 
-## Importing
+---
 
-```javascript
-import log from './logger.js'; // Default import
-import { add, subtract } from './math.js'; // Named imports
-
-log(add(5, 3)); // 8
-```
-
-## Practice: Dynamic Imports
-Dynamic imports allow you to load modules on demand using `import()`, which returns a promise.
-
-```javascript
-async function loadMath() {
-  const math = await import('./math.js');
-  console.log(math.add(10, 5));
-}
-
-loadMath();
-```
-
-## Interview Questions
-1. **What is the difference between Named and Default exports?**
-   Named exports require braces and must match the name exactly. Default exports can be imported with any name and don't use braces.
-2. **What are the benefits of ES Modules over CommonJS?**
-   ESM supports static analysis, which enables "tree-shaking" (removing unused code). It is also the browser-native standard.
+### 4. Comparison: ESM vs CommonJS
+| Feature | ES Modules (ESM) | CommonJS (CJS) |
+| :--- | :--- | :--- |
+| **Syntax** | `import / export` | `require / module.exports` |
+| **Loading** | Static (Async) | Dynamic (Sync) |
+| **Browser** | Native Support | Requires Bundler (usually) |
+| **Tree Shaking** | ✅ Enabled | ❌ Harder to achieve |
 
 ---
 

@@ -1,43 +1,84 @@
 - Category: JavaScript
+- Track: JavaScript
 - Difficulty: Advanced
-- Related: classes-objects
+- Related: classes-objects, this-keyword
 
 ### What is a Prototype?
-In JavaScript, almost everything is an object. Prototypes are the mechanism by which JavaScript objects inherit features from one another.
+JavaScript is a **prototype-based** language. This means that objects inherit properties and methods directly from other objects. While ES6 introduced the `class` keyword, it is actually "syntactic sugar" over JavaScript's underlying prototypal system.
 
 ---
 
-### 1. Prototypal Inheritance
-**Theory**: Every object has a hidden, internal property called `[[Prototype]]`. When you try to access a method on an object, JS first looks on the object itself. If it doesn't find it, it looks up the "Prototype Chain".
+### 1. Prototype Chain Lookup
+**Working Flow: How JS finds a property**
 
-**Working Flow**
-```text
-[ myObj ] --( finds nothing )--> [ myObj's Prototype ] --( finds toString() )--> [ Returns Value ]
+```mermaid
+graph TD
+    A[myObj.toString] --> B{Is it on myObj?}
+    B -- No --> C{Is it on Prototype?}
+    C -- No --> D{Is it on Object.prototype?}
+    D -- Yes --> E[Execute method]
+    D -- No --> F[Return undefined]
+    B -- Yes --> E
 ```
 
-**Key Features**:
-- **Object.create()**: Can be used to manually set an object's prototype.
-- **Memory Efficiency**: Methods placed on a prototype are shared among all instances, saving memory.
+---
 
-**Step-by-Step Example**:
+### 2. Core Prototypal Concepts
+
+#### The Prototype Chain
+**Theory**: Every object has a link to another object called its **prototype**. This continues until it reaches `null`, which marks the end of the chain.
 ```javascript
-// Step 1: A simple object with a method
-const animal = {
-  eats: true,
-  walk() {
-    console.log("Animal walks");
-  }
+const arr = [1, 2, 3];
+// arr -> Array.prototype -> Object.prototype -> null
+```
+
+#### Property Shadowing
+**Theory**: If an object and its prototype have a property with the same name, the object's own property "shadows" (wins over) the prototype's.
+```javascript
+const parent = { color: "red" };
+const child = Object.create(parent);
+child.color = "blue"; 
+
+console.log(child.color); // "blue"
+```
+**Output**: `blue`
+
+#### prototype vs __proto__
+- `prototype`: A property of **constructor functions** used to build the chain for instances.
+- `__proto__`: A property of an **instance** that points to its actual prototype object.
+
+---
+
+### 3. Comprehensive Examples
+
+#### Method Sharing (Efficiency)
+**Theory**: Instead of giving every instance its own copy of a function, we put it on the prototype once to save memory.
+```javascript
+function User(name) {
+  this.name = name;
+}
+
+// Share this method across ALL User instances
+User.prototype.greet = function() {
+  console.log(`Hi, I'm ${this.name}`);
 };
 
-// Step 2: Create a new object that INHERITS from 'animal'
-const rabbit = Object.create(animal);
-rabbit.jumps = true;
+const u1 = new User("Alice");
+const u2 = new User("Bob");
 
-// Step 3: Access properties
-console.log(rabbit.jumps); // true (found directly on rabbit)
-console.log(rabbit.eats);  // true (found on prototype: animal)
-rabbit.walk();             // "Animal walks" (found on prototype: animal)
+u1.greet(); // Works
+u2.greet(); // Works
 ```
+
+---
+
+### 4. Summary Table
+
+| Feature | Description | Example |
+| :--- | :--- | :--- |
+| **Object.create()** | Creates object with specific proto | `Object.create(obj)` |
+| **hasOwnProperty()** | Checks if property is NOT on proto | `obj.hasOwnProperty('x')` |
+| **[[Prototype]]** | The internal link to parent | Accessible via `__proto__` |
 
 ---
 
